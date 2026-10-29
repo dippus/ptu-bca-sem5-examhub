@@ -101,17 +101,157 @@
         .main-layout {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 28px 24px;
+            padding: 24px 20px;
             display: grid;
             grid-template-columns: 310px 1fr;
-            gap: 28px;
+            gap: 24px;
             flex: 1;
             width: 100%;
         }
 
+        /* Mobile Optimization */
         @media (max-width: 968px) {
+            header {
+                padding: 14px 16px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .logo-title h1 {
+                font-size: 1.2rem;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .persistence-badge {
+                justify-content: center;
+                align-self: center;
+            }
+
+            .view-switch-tabs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                width: 100%;
+            }
+
+            .view-btn {
+                padding: 10px 8px;
+                font-size: 0.8rem;
+                justify-content: center;
+                text-align: center;
+            }
+
             .main-layout {
+                padding: 12px;
+                gap: 16px;
                 grid-template-columns: 1fr;
+            }
+
+            /* Horizontal Scrollable Subject Tabs on Mobile */
+            .sidebar {
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 8px;
+                gap: 10px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .sidebar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .sidebar-label {
+                display: none;
+            }
+
+            .sub-btn {
+                min-width: 200px;
+                flex-shrink: 0;
+                padding: 12px 14px;
+                border-radius: 12px;
+            }
+
+            .sub-name {
+                font-size: 0.95rem;
+                white-space: nowrap;
+            }
+
+            .sub-code {
+                font-size: 0.72rem;
+            }
+
+            /* Unit Navigation on Mobile */
+            .unit-nav {
+                padding: 6px;
+                gap: 6px;
+                margin-bottom: 14px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .unit-btn {
+                padding: 8px 12px;
+                font-size: 0.82rem;
+            }
+
+            /* Cards and details on Mobile */
+            .syllabus-overview-card {
+                padding: 14px;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin-bottom: 16px;
+            }
+
+            .info-pill {
+                padding: 8px 12px;
+            }
+
+            .info-label {
+                font-size: 0.68rem;
+            }
+
+            .info-val {
+                font-size: 0.85rem;
+            }
+
+            .unit-block-syllabus {
+                padding: 16px 14px;
+                border-radius: 12px;
+                margin-bottom: 14px;
+            }
+
+            .syllabus-unit-title {
+                font-size: 1.1rem;
+            }
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .topic-chip {
+                padding: 10px 12px;
+                font-size: 0.84rem;
+            }
+
+            .q-card {
+                padding: 14px 14px;
+                border-radius: 10px;
+            }
+
+            .q-text {
+                font-size: 0.9rem;
+                line-height: 1.45;
+            }
+
+            .section-label {
+                font-size: 0.98rem;
+                margin: 18px 0 10px 0;
             }
         }
 
@@ -393,7 +533,7 @@
             </div>
 
             <!-- Persistence Indicator Badge -->
-            <div style="display:flex; align-items:center; gap:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); padding:4px 12px; border-radius:9999px; font-size:0.78rem; font-weight:700; color:#34d399;">
+            <div class="persistence-badge" style="display:flex; align-items:center; gap:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); padding:4px 12px; border-radius:9999px; font-size:0.78rem; font-weight:700; color:#34d399;">
                 <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; box-shadow:0 0 8px #10b981;"></span>
                 Persistence Mode: ON (Auto-Saved)
             </div>
@@ -413,7 +553,7 @@
     <div class="main-layout">
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
-            <div style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding-left: 4px;">Choose Subject</div>
+            <div class="sidebar-label" style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding-left: 4px;">Choose Subject</div>
             
             <button class="sub-btn active" onclick="switchSubject('php')">
                 <span class="sub-name">Programming in PHP</span>
