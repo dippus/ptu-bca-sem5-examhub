@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKGPTU BCA Sem-5 Master Exam & Syllabus Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #090d16;
+            --surface: #111827;
+            --surface-hover: #1f293d;
+            --border: #233152;
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: linear-gradient(135deg, rgba(30, 27, 75, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 32px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            backdrop-filter: blur(16px);
+        }
+
+        .header-container {
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo-title h1 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #818cf8, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .view-switch-tabs {
+            display: flex;
+            background: rgba(0, 0, 0, 0.35);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            gap: 6px;
+        }
+
+        .view-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.4);
+        }
+
+        .main-layout {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 28px 24px;
+            display: grid;
+            grid-template-columns: 310px 1fr;
+            gap: 28px;
+            flex: 1;
+            width: 100%;
+        }
+
+        @media (max-width: 968px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar Tabs */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sub-btn {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 16px 18px;
+            text-align: left;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sub-btn:hover {
+            background: var(--surface-hover);
+            color: var(--text-main);
+            border-color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .sub-btn.active {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.25) 0%, rgba(14, 165, 233, 0.15) 100%);
+            border-color: var(--primary-light);
+            color: var(--text-main);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.25);
+        }
+
+        .sub-btn.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--primary-light);
+        }
+
+        .sub-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .sub-code {
+            font-size: 0.8rem;
+            font-family: 'Fira Code', monospace;
+            color: var(--accent);
+        }
+
+        .unit-nav {
+            display: flex;
+            gap: 10px;
+            background: var(--surface);
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        .unit-btn {
+            flex: 1;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .unit-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .unit-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 2px 10px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Syllabus View Styling */
+        .syllabus-overview-card {
+            background: linear-gradient(135deg, #131b2e 0%, #0d1527 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .info-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            padding: 12px 16px;
+            border-radius: 10px;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .info-val {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #38bdf8;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .unit-block-syllabus {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 20px;
+            transition: all 0.2s;
+        }
+
+        .unit-block-syllabus:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .syllabus-unit-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+
+        .syllabus-unit-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 14px;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .topic-chip {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            line-height: 1.45;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .topic-chip::before {
+            content: '📌';
+            font-size: 0.9rem;
+        }
+
+        /* Question Cards */
+        .q-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .q-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: var(--surface-hover);
+        }
+
+        .q-text {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            line-height: 1.5;
+        }
+
+        .q-meta {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .tag-pyq {
+            background: rgba(56, 189, 248, 0.12);
+            color: #38bdf8;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-family: 'Fira Code', monospace;
+            font-weight: 500;
+        }
+
+        .tag-high {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 24px 0 14px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .badge-2m {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .badge-10m {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-title">
+                <h1>IKGPTU BCA Sem-5 Master Exam & Syllabus Portal</h1>
+            </div>
+
+            <!-- Persistence Indicator Badge -->
+            <div style="display:flex; align-items:center; gap:8px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.3); padding:4px 12px; border-radius:9999px; font-size:0.78rem; font-weight:700; color:#34d399;">
+                <span style="display:inline-block; width:7px; height:7px; background:#10b981; border-radius:50%; box-shadow:0 0 8px #10b981;"></span>
+                Persistence Mode: ON (Auto-Saved)
+            </div>
+            
+            <!-- Global Mode Switcher: Questions vs Complete Official Syllabus -->
+            <div class="view-switch-tabs">
+                <button class="view-btn active" id="btn-mode-questions" onclick="switchMode('questions')">
+                    📝 Question Bank & PYQ
+                </button>
+                <button class="view-btn" id="btn-mode-syllabus" onclick="switchMode('syllabus')">
+                    📖 Complete Official Syllabus
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding-left: 4px;">Choose Subject</div>
+            
+            <button class="sub-btn active" onclick="switchSubject('php')">
+                <span class="sub-name">Programming in PHP</span>
+                <span class="sub-code">UGCA-1929 | M.Code: 90312</span>
+            </button>
+
+            <button class="sub-btn" onclick="switchSubject('java')">
+                <span class="sub-name">Programming in Java</span>
+                <span class="sub-code">UGCA-1932 | M.Code: 90315</span>
+            </button>
+
+            <button class="sub-btn" onclick="switchSubject('linux')">
+                <span class="sub-name">Linux Operating System</span>
+                <span class="sub-code">UGCA-1935 | M.Code: 90318</span>
+            </button>
+
+            <button class="sub-btn" onclick="switchSubject('iot')">
+                <span class="sub-name">Internet of Things (IoT)</span>
+                <span class="sub-code">UGCA-1933 | M.Code: 90316</span>
+            </button>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+            <!-- Unit Filter Tabs -->
+            <div class="unit-nav">
+                <button class="unit-btn active" onclick="switchUnit(1)">Unit I</button>
+                <button class="unit-btn" onclick="switchUnit(2)">Unit II</button>
+                <button class="unit-btn" onclick="switchUnit(3)">Unit III</button>
+                <button class="unit-btn" onclick="switchUnit(4)">Unit IV</button>
+                <button class="unit-btn" onclick="switchUnit('all')">View All Units</button>
+            </div>
+
+            <!-- Content injected via JS -->
+            <div id="content-container"></div>
+        </main>
+    </div>
+
+    <script>
+        const syllabusData = {
+            php: {
+                title: "Programming in PHP",
+                code: "UGCA1929",
+                mcode: "90312",
+                credits: 3,
+                contactHours: "33 Hours",
+                extMarks: 60,
+                intMarks: 40,
+                textbooks: [
+                    "PHP: The Complete Reference, Steven Holzner, Tata McGraw Hill.",
+                    "Programming PHP, Kevin Tetroi, O'Reilly."
+                ],
+                units: {
+                    1: {
+                        name: "Unit-I: Introduction to PHP & Language Essentials",
+                        hours: "11 Hours",
+                        topics: [
+                            "Evolution of PHP & comparison with other scripting languages",
+                            "Interfaces to External systems, Hardware & Software requirements",
+                            "PHP Scripting basics, Basic PHP Development & execution flow",
+                            "Working of PHP scripts, basic PHP syntax, embedding in HTML",
+                            "PHP data types (Scalar, Compound, Special)",
+                            "Displaying type information: Testing for specific data type (is_int, is_string, etc.)",
+                            "Changing type with settype() and casting",
+                            "Operators (Arithmetic, Assignment, Comparison, Logical)",
+                            "Variable manipulation, Dynamic variables ($$var), Variable scope (Local, Global, Static)"
+                        ]
+                    },
+                    2: {
+                        name: "Unit-II: Control Statements, Functions, Strings & Arrays",
+                        hours: "10 Hours",
+                        topics: [
+                            "Decision making: if(), elseif() conditional statements, switch statement",
+                            "Ternary operator ( ? : ), Looping statements: while(), do-while(), for()",
+                            "Functions: Definition, creation, returning values, Library functions vs User-defined functions",
+                            "Dynamic functions, Default arguments, Passing arguments by value & reference",
+                            "String Manipulation: Formatting string for presentation & storage",
+                            "Joining and splitting strings (explode, implode), comparing strings (strcmp)",
+                            "Arrays: Anatomy of an Array, Creating indexed and associative arrays",
+                            "Looping array elements using each() and foreach() loop"
+                        ]
+                    },
+                    3: {
+                        name: "Unit-III: Forms Handling, Files & Directories, Graphics",
+                        hours: "10 Hours",
+                        topics: [
+                            "Working with Forms: Super global variables & Super global arrays ($_GET, $_POST, $_REQUEST)",
+                            "Importing user input, Accessing user input, Combining HTML and PHP code",
+                            "Using hidden fields in forms, Redirecting user (header function)",
+                            "Working with Files & Directories: Understanding files & directory structure",
+                            "Opening (fopen) and closing (fclose) files, reading & writing files",
+                            "Copying, renaming, and deleting files (copy, rename, unlink)",
+                            "Working with directories (opendir, readdir, mkdir, rmdir)",
+                            "File Uploading and Downloading mechanism ($_FILES)",
+                            "Generating Images with PHP: Basic computer graphics, Creating images using GD library"
+                        ]
+                    },
+                    4: {
+                        name: "Unit-IV: Database Connectivity with MySQL",
+                        hours: "2 Hours",
+                        topics: [
+                            "Introduction to Relational Database Management Systems (RDBMS)",
+                            "Establishing Connection with MySQL Database (mysqli_connect, error handling)",
+                            "Performing basic Data Manipulation Language (DML) operations",
+                            "Executing SQL Queries: INSERT command with PHP",
+                            "Executing SQL Queries: DELETE command with PHP",
+                            "Executing SQL Queries: UPDATE command with PHP",
+                            "Executing SQL Queries: SELECT command and fetching records (mysqli_fetch_assoc, mysqli_query)"
+                        ]
+                    }
+                }
+            },
+            java: {
+                title: "Programming in Java",
+                code: "UGCA1932",
+                mcode: "90315",
+                credits: 4,
+                contactHours: "44 Hours",
+                extMarks: 60,
+                intMarks: 40,
+                textbooks: [
+                    "Programming with Java: A Primer, 5th Edition, E. Balagurusamy, TMH.",
+                    "Java Programming for Core and Advanced Learners, Sagayaraja et al., Universities Press.",
+                    "Java Fundamentals: A Comprehensive Introduction, H. Schildt, D. Skrien, TMH."
+                ],
+                units: {
+                    1: {
+                        name: "Unit-I: Java Fundamentals & Essentials",
+                        hours: "10 Hours",
+                        topics: [
+                            "Introduction to Java, Stage for Java, Origin, Challenges of Java",
+                            "Java Features: Platform independence, Object-Oriented, Robust, Secure, Multi-threaded",
+                            "Java Program Development, Java API, JDK vs JRE vs JVM",
+                            "Elements of Java Program, Variables and Literals, Primitive Data Types",
+                            "The String class basics, Constants, Operators, Expressions",
+                            "Scope of Variables and Blocks, Types of Comments in Java"
+                        ]
+                    },
+                    2: {
+                        name: "Unit-II: Control Statements, Classes, Objects & Inheritance",
+                        hours: "12 Hours",
+                        topics: [
+                            "Decision making: if, if-else, nested if, else-if ladder, switch, conditional operator",
+                            "Looping statements: while, do-while, for, nested loops",
+                            "Jumping statements: Break, Continue, Labeled break",
+                            "Basic concepts of OOP: Classes and Objects, Data Abstraction & Encapsulation",
+                            "Modifiers (Access Specifiers), Passing arguments to methods",
+                            "Constructors, Overloaded Constructors, Garbage Collection & finalize()",
+                            "Overloaded Operators, Static Class Members (static methods and variables)",
+                            "Inheritance basics, Inheriting and Overriding superclass methods",
+                            "Calling superclass constructor using 'super', Polymorphism",
+                            "Abstract Classes and Final Class / Final Methods"
+                        ]
+                    },
+                    3: {
+                        name: "Unit-III: Arrays, Strings, Interfaces, Packages & Exceptions",
+                        hours: "10 Hours",
+                        topics: [
+                            "Introduction to Arrays, Processing array contents, Passing array as argument, Returning array",
+                            "Array of objects, 2D arrays, Arrays with three or more dimensions",
+                            "String class methods, String concatenation, Comparing strings, Substring",
+                            "Difference between String and StringBuffer class, StringTokenizer class",
+                            "Basics of Interface, Multiple Interfaces, Multiple Inheritance using Interface, Multilevel Interface",
+                            "Packages: Creating and accessing packages, package class, Static Import, Access Specifiers in packages",
+                            "Exception Handling: Introduction, Try and Catch blocks, Multiple Catch blocks",
+                            "Nested Try, Finally block, Throw and Throws statements, Built-in Exceptions"
+                        ]
+                    },
+                    4: {
+                        name: "Unit-IV: Multithreading, Applets & I/O Streams",
+                        hours: "12 Hours",
+                        topics: [
+                            "Multithreading Introduction, Threads in Java, Life cycle of a Thread",
+                            "Thread Creation: Extending Thread class vs Implementing Runnable interface",
+                            "Joining a Thread, Thread Scheduler, Thread Priority, Thread Synchronization",
+                            "Applets: Introduction, Applet Class, Applet Life Cycle (init, start, paint, stop, destroy)",
+                            "Graphics in Applet, Event Handling overview",
+                            "File and I/O Streams: File Class, Streams concept, Byte Streams vs Character Streams",
+                            "Filtered Byte Streams, Random Access File Class"
+                        ]
+                    }
+                }
+            },
+            linux: {
+                title: "Linux Operating System",
+                code: "UGCA1935",
+                mcode: "90318",
+                credits: 4,
+                contactHours: "44 Hours",
+                extMarks: 60,
+                intMarks: 40,
+                textbooks: [
+                    "Linux: The Complete Reference by Richard Petersen, Tata McGraw-Hill.",
+                    "Linux in a Nutshell, 6th Edition, Stephen Figgins et al., O'Reilly Media.",
+                    "Linux Administration: A Beginner's Guide by Steve Shah & Wale Soyinka."
+                ],
+                units: {
+                    1: {
+                        name: "Unit-I: Introduction to Linux, Desktops & Editors",
+                        hours: "12 Hours",
+                        topics: [
+                            "History of Linux & Unix, Open Source OS evolution",
+                            "Overview and internal structure/architecture of Linux Operating System",
+                            "Linux Installation procedure and partition concepts",
+                            "Desktops: The X Window System, GNOME desktop, KDE desktop, Desktop operations",
+                            "Different types of text editors in Linux",
+                            "vi editor: modes of operation (Command, Insert, Ex/Last-line) and essential commands"
+                        ]
+                    },
+                    2: {
+                        name: "Unit-II: Shells, Utilities & Shell Scripting",
+                        hours: "12 Hours",
+                        topics: [
+                            "Role of shells in Linux environment, Different types of shells (bash, sh, csh, ksh)",
+                            "Shell configuration: Shell initialization & configuration files and directories",
+                            "Aliases, Filename expansion (wildcards *, ?, [])",
+                            "Standard Input/Output & Redirection (<, >, >>), Pipes (|), Managing Jobs (bg, fg, ps, kill)",
+                            "Shell Scripting: Different types of statements, variables in shell, variable naming rules",
+                            "Assigning values to shell variables, Default shell variables, Displaying values (echo)",
+                            "Accepting user input (read) and displaying messages",
+                            "Shell scripts implementing control statements (if, if-else, case, while, for loops)"
+                        ]
+                    },
+                    3: {
+                        name: "Unit-III: File Systems & Linux Software Management",
+                        hours: "10 Hours",
+                        topics: [
+                            "Linux Files, Inodes, File system structure (FHS: /, /bin, /etc, /home, /dev, /var, /usr)",
+                            "Commands for managing files & directories (ls, cp, mv, rm, mkdir, rmdir, cat, more, less)",
+                            "File search & text filter utilities (find, grep, head, tail, sort, wc)",
+                            "File permissions and ownership (chmod, chown, chgrp, umask, numeric & symbolic modes)",
+                            "Software Management: Package managers (RPM, dpkg, yum/apt)",
+                            "Office & Database applications, Graphics tools and Multimedia in Linux",
+                            "Internet & Network services: Web, FTP, and Java clients"
+                        ]
+                    },
+                    4: {
+                        name: "Unit-IV: Linux Administration & Kernel Administration",
+                        hours: "10 Hours",
+                        topics: [
+                            "Linux Administration: Managing users and groups (useradd, usermod, userdel, groupadd)",
+                            "User configuration files: /etc/passwd, /etc/shadow, /etc/group",
+                            "Superuser control (root account, su, sudo configuration)",
+                            "System Runlevels (Runlevel 0 to 6, /etc/inittab, systemd targets)",
+                            "Managing File Systems: Mounting & unmounting (mount, umount, /etc/fstab), Disk quotas",
+                            "Kernel Administration: Linux kernel sources, rebuilding kernel, installing new kernel",
+                            "Virtualization concepts in Linux, Backup management tools (tar, dump, restore)"
+                        ]
+                    }
+                }
+            },
+            iot: {
+                title: "Internet of Things (IoT)",
+                code: "UGCA1933",
+                mcode: "90316",
+                credits: 4,
+                contactHours: "44 Hours",
+                extMarks: 60,
+                intMarks: 40,
+                textbooks: [
+                    "Internet of Things: A Hands-on Approach, Arshdeep Bahga and Vijay Madisetti, University Press."
+                ],
+                units: {
+                    1: {
+                        name: "Unit-I: Physical & Logical Design of IoT, Enabling Technologies",
+                        hours: "11 Hours",
+                        topics: [
+                            "Definition and Need of IoT, Characteristics of IoT",
+                            "Physical Design of IoT: Things in IoT, IoT Protocols (Link, Network, Transport, Application)",
+                            "Logical Design of IoT: Functional blocks, Communication models, Communication APIs",
+                            "IoT Enabled Technologies: Wireless Sensor Networks (WSN), Cloud Computing",
+                            "Big Data Analytics in IoT, Communication Protocols, Embedded Systems",
+                            "IoT Levels and Deployment Templates (Level 1 to Level 6)"
+                        ]
+                    },
+                    2: {
+                        name: "Unit-II: Domain Specific Applications & M2M",
+                        hours: "11 Hours",
+                        topics: [
+                            "Domain Specific IoTs: Smart Home (lighting, intrusion detection, appliances)",
+                            "Smart Cities (smart parking, smart lighting, smart traffic)",
+                            "Smart Environment (weather monitoring, air pollution, forest fire detection)",
+                            "Smart Energy (smart grids, renewable energy systems)",
+                            "Smart Retail, Smart Logistics, Smart Agriculture, Industry 4.0, Health and Lifestyle",
+                            "M2M (Machine to Machine) applications and architectural fundamentals",
+                            "Comparison between M2M and IoT",
+                            "Software Defined Networks (SDN) in IoT, Network Function Virtualization (NFV)"
+                        ]
+                    },
+                    3: {
+                        name: "Unit-III: IoT System Management & Design Methodology",
+                        hours: "11 Hours",
+                        topics: [
+                            "Need for IoT System Management, Challenges in managing IoT systems",
+                            "Simple Network Management Protocol (SNMP) and limitations in IoT",
+                            "Network Operator Requirements for IoT management",
+                            "NETCONF protocol: Architecture, Operations, Capabilities",
+                            "YANG Data Modeling Language: Modules, Data types, State data, RPCs",
+                            "IoT System Management with NETCONF-YANG architecture",
+                            "IoT Design Methodology: 10-step systematic design process"
+                        ]
+                    },
+                    4: {
+                        name: "Unit-IV: Raspberry Pi, Cloud Storage & Security",
+                        hours: "11 Hours",
+                        topics: [
+                            "Introduction to Raspberry Pi platform: Architecture, OS, GPIO pins",
+                            "Raspberry Pi Interfaces: Serial interface, SPI (Serial Peripheral Interface), I2C interface",
+                            "Introduction to Cloud Storage Models for IoT (Private, Public, Hybrid clouds)",
+                            "Communication APIs: REST-based communication APIs, WebSocket-based communication APIs",
+                            "Web Server for IoT: Hosting lightweight web server on IoT edge",
+                            "Cloud platforms for IoT (AWS IoT, Google Cloud IoT, ThingSpeak)",
+                            "Security Management in an IoT System: Security requirements, vulnerabilities, threats & mitigation"
+                        ]
+                    }
+                }
+            }
+        };
+
+        // Existing questions bank dataset
+        const examQuestions = {
+            php: {
+                1: {
+                    q2m: [
+                        { text: "What is PHP and why is it called a server-side scripting language?", tag: "Nov 2025, Dec 2022" },
+                        { text: "Clarify the difference of use of <?php ... ?> and <?= ... ?> tags.", tag: "Nov 2023" },
+                        { text: "What is variable scope in PHP? (Local, Global, Static)", tag: "Nov 2025, Nov 2024" },
+                        { text: "Differentiate between echo and print statements with an example.", tag: "Nov 2023" },
+                        { text: "What are dynamic variables (variable variables $$) in PHP?", tag: "High Probability" }
+                    ],
+                    q10m: [
+                        { text: "Discuss PHP data types in detail with syntax and examples. Also explain variable manipulation and scope.", tag: "Nov 2025", hot: true },
+                        { text: "How is the PHP development environment configured to execute server-side scripts? Compare client-side vs server-side scripting.", tag: "Nov 2023" },
+                        { text: "Explain operators and dynamic type casting (settype, gettype) with demonstration programs.", tag: "Expected 2026" }
+                    ]
+                },
+                2: {
+                    q2m: [
+                        { text: "What is the difference between while() and do-while() loops?", tag: "Nov 2025" },
+                        { text: "What is the purpose of default arguments in a PHP function?", tag: "Nov 2025" },
+                        { text: "What are callback functions and how are they used in PHP?", tag: "Nov 2023" },
+                        { text: "How do you traverse an associative array using foreach() loop?", tag: "Nov 2024" },
+                        { text: "Mention two built-in string functions used for joining and splitting strings (implode, explode).", tag: "High Yield" }
+                    ],
+                    q10m: [
+                        { text: "What are arrays in PHP? Explain indexed and associative arrays with examples. Write a program using foreach() to display array elements.", tag: "Nov 2025, Nov 2024, Nov 2023", hot: true },
+                        { text: "Explain control statements in PHP with suitable examples: if, elseif ladder, switch, while, do-while, and for loop.", tag: "Nov 2025" },
+                        { text: "Write a PHP script to check whether an entered number or string is a Palindrome or not.", tag: "Nov 2024", hot: true },
+                        { text: "Calculate sum of only 'EVEN' integer numbers stored in an array using a recursive or user-defined function.", tag: "Nov 2023" }
+                    ]
+                },
+                3: {
+                    q2m: [
+                        { text: "What are superglobal variables in PHP? Give examples.", tag: "Nov 2025, Nov 2024, Nov 2023" },
+                        { text: "What is the purpose of combining HTML and PHP code in dynamic web pages?", tag: "Nov 2025" },
+                        { text: "What is the difference between a file and a directory? Which PHP function copies a file?", tag: "Nov 2025" },
+                        { text: "What is the purpose of 'require' and 'include' directives in PHP? Explain difference.", tag: "Nov 2023, 100% Core" },
+                        { text: "How is a session started and destroyed in PHP? (session_start, session_destroy)", tag: "Nov 2023" }
+                    ],
+                    q10m: [
+                        { text: "Explain the working of forms in PHP. Discuss how user input is accessed using $_GET, $_POST, and $_REQUEST with complete HTML + PHP code.", tag: "Nov 2025, Nov 2024", hot: true },
+                        { text: "Explain file handling functions in PHP with examples: opening (fopen), reading (fread/fgets), writing (fwrite), closing (fclose), copying, and deleting.", tag: "Nov 2025, Nov 2024", hot: true },
+                        { text: "Write a PHP script to accept username, password, and email from an HTML form, validate the email format, and warn the user via alert if incorrect.", tag: "Nov 2023" }
+                    ]
+                },
+                4: {
+                    q2m: [
+                        { text: "What is the difference between DELETE and DROP commands in SQL?", tag: "Nov 2025" },
+                        { text: "Write the SQL command syntax to insert data into a table.", tag: "Nov 2025" },
+                        { text: "What is DML (Data Manipulation Language)? Mention its commands.", tag: "Nov 2024" },
+                        { text: "How is a MySQL database created using PHP? Write syntax.", tag: "Nov 2023" },
+                        { text: "What is the difference between mysqli_fetch_assoc() and mysqli_fetch_array()?", tag: "100% Core" }
+                    ],
+                    q10m: [
+                        { text: "What are DML operations? Explain INSERT, UPDATE, DELETE, and SELECT commands with PHP syntax and database execution examples.", tag: "Nov 2025", hot: true },
+                        { text: "Write step-by-step procedure to create a connection with MySQL backend in PHP. Explain with a complete script including error handling.", tag: "Nov 2024, Dec 2022", hot: true },
+                        { text: "Write a complete PHP script to fetch student records from a MySQL table and display them in a formatted HTML table.", tag: "Expected 2026", hot: true }
+                    ]
+                }
+            },
+            java: {
+                1: {
+                    q2m: [
+                        { text: "List four features of Java that support platform independence and security.", tag: "Nov 2025" },
+                        { text: "What is the JRE and how does it differ from the JDK?", tag: "Nov 2025, Dec 2024" },
+                        { text: "Explain primitive data types in Java with their memory sizes.", tag: "Nov 2025" }
+                    ],
+                    q10m: [
+                        { text: "Explain the architecture of Java Virtual Machine (JVM). How does Java achieve platform independence?", tag: "Dec 2024, Nov 2023", hot: true },
+                        { text: "Explain looping and control constructs in Java including loop control (break, continue, labeled break).", tag: "Nov 2025" }
+                    ]
+                },
+                2: {
+                    q2m: [
+                        { text: "Define constructor and state two key properties of constructors in Java.", tag: "Nov 2025" },
+                        { text: "What is the difference between method overloading and method overriding?", tag: "Dec 2024, Nov 2023" },
+                        { text: "What is the role of the 'final' keyword with variables, methods, and classes?", tag: "Dec 2024" }
+                    ],
+                    q10m: [
+                        { text: "Describe classes and objects in Java: access modifiers, passing arguments, constructors, static members, and garbage collection.", tag: "Nov 2025", hot: true },
+                        { text: "Explain inheritance and polymorphism: single & multilevel inheritance, method overriding, super keyword, abstract classes vs interfaces.", tag: "Nov 2025, Dec 2024", hot: true },
+                        { text: "Design classes Account and SavingsAccount with methods deposit(), withdraw(), and interest calculation. Demonstrate overriding and use of super.", tag: "Nov 2025", hot: true }
+                    ]
+                },
+                3: {
+                    q2m: [
+                        { text: "What is the difference between String and StringBuffer class?", tag: "Nov 2025, Dec 2024" },
+                        { text: "What is a Package in Java? Name two built-in packages.", tag: "Nov 2023" },
+                        { text: "What is the purpose of the 'finally' block in exception handling?", tag: "Dec 2024" }
+                    ],
+                    q10m: [
+                        { text: "What is Exception Handling? Explain try, catch, finally, throw, and throws. Write a program demonstrating multiple catch and nested try.", tag: "Dec 2024, Nov 2023", hot: true },
+                        { text: "What is an Interface? How does Java achieve multiple inheritance using Interfaces?", tag: "Dec 2024, Dec 2022", hot: true }
+                    ]
+                },
+                4: {
+                    q2m: [
+                        { text: "Write the basic life-cycle methods of an Applet.", tag: "Nov 2025, Dec 2024" },
+                        { text: "Name four stream classes (byte/character) and state one usage of each.", tag: "Nov 2025" },
+                        { text: "What is Thread Synchronization and why is it required?", tag: "Nov 2023" }
+                    ],
+                    q10m: [
+                        { text: "Explain multithreading in Java: thread creation (Thread vs Runnable), scheduler, priorities, and thread synchronization.", tag: "Nov 2025, Dec 2024", hot: true },
+                        { text: "Write notes on Java I/O stream hierarchy: byte vs character streams, buffered streams, and safe I/O with try-with-resources.", tag: "Nov 2025" }
+                    ]
+                }
+            },
+            linux: {
+                1: {
+                    q2m: [
+                        { text: "What is the Linux Kernel and what is its role?", tag: "Nov 2025, Dec 2024" },
+                        { text: "What is the difference between CLI and GUI desktops (GNOME vs KDE)?", tag: "Nov 2025" },
+                        { text: "What are the three modes of vi editor? (Command, Insert, Last-line)", tag: "Dec 2024, Jan 2023" }
+                    ],
+                    q10m: [
+                        { text: "Explain the architecture and internal structure of Linux Operating System with a neat block diagram.", tag: "Nov 2025, Dec 2024, Jan 2023", hot: true },
+                        { text: "Explain the vi editor in detail: its modes of operation, cursor movement, editing commands, and file saving.", tag: "Nov 2025, Dec 2024", hot: true }
+                    ]
+                },
+                2: {
+                    q2m: [
+                        { text: "What is a Shell? Mention three types of shells in Linux.", tag: "Nov 2025" },
+                        { text: "What are Pipes (|) and I/O redirection in Linux?", tag: "Dec 2024, Jan 2023" },
+                        { text: "What is an alias in Linux? Write syntax to create an alias.", tag: "Nov 2025" }
+                    ],
+                    q10m: [
+                        { text: "What is shell scripting? Explain control statements. Write a shell script to find whether a number is prime or find its factorial.", tag: "Nov 2025, Dec 2024", hot: true },
+                        { text: "Explain standard input/output redirection and filters/pipes in Linux with command examples.", tag: "Dec 2024, Jan 2023" }
+                    ]
+                },
+                3: {
+                    q2m: [
+                        { text: "Explain the purpose of /etc, /bin, /dev, and /home directories in Linux.", tag: "Nov 2025, Jan 2023" },
+                        { text: "What is the difference between chmod and chown commands?", tag: "Nov 2025" }
+                    ],
+                    q10m: [
+                        { text: "Explain Linux File System Hierarchy Standard (FHS) in detail with tree diagram.", tag: "Nov 2025, Dec 2024", hot: true },
+                        { text: "Explain file permissions in Linux: symbolic and octal modes of chmod, setUID and setGID.", tag: "Dec 2024, Jan 2023", hot: true }
+                    ]
+                },
+                4: {
+                    q2m: [
+                        { text: "What information is stored in /etc/passwd and /etc/shadow files?", tag: "Nov 2025, Dec 2024" },
+                        { text: "What are Runlevels in Linux? State the purpose of runlevel 0, 3, 5, and 6.", tag: "Dec 2024, Jan 2023" }
+                    ],
+                    q10m: [
+                        { text: "Explain User and Group Administration in Linux: adding, deleting, modifying users, and sudo privileges.", tag: "Nov 2025, Dec 2024", hot: true },
+                        { text: "What is the Linux Kernel? Explain step-by-step procedure for rebuilding and installing a Linux kernel.", tag: "Dec 2024, Jan 2023", hot: true }
+                    ]
+                }
+            },
+            iot: {
+                1: {
+                    q2m: [
+                        { text: "Define IoT and state its four key characteristics.", tag: "Dec 2022, PTU Verified" },
+                        { text: "What are Wireless Sensor Networks (WSN) in IoT?", tag: "Dec 2022" },
+                        { text: "What is the role of Big Data Analytics in IoT?", tag: "Dec 2022" }
+                    ],
+                    q10m: [
+                        { text: "What is the need of IoT? Explain key enabling technologies: WSN, Cloud, Big Data, Embedded Systems.", tag: "Dec 2022, 100% Core", hot: true },
+                        { text: "Explain IoT Levels and Deployment Templates (Level 1 to Level 6) with diagrams.", tag: "Expected 2026", hot: true }
+                    ]
+                },
+                2: {
+                    q2m: [
+                        { text: "What is Software Defined Networking (SDN) in IoT?", tag: "Dec 2022" },
+                        { text: "What is Network Function Virtualization (NFV)?", tag: "Dec 2022" }
+                    ],
+                    q10m: [
+                        { text: "What are M2M applications? Differentiate between M2M and IoT in detail with a comparison table.", tag: "Dec 2022, 100% Guaranteed", hot: true },
+                        { text: "Explain domain-specific IoT applications: Smart Home, Smart Agriculture, Smart Healthcare, and Smart Logistics.", tag: "Dec 2022", hot: true }
+                    ]
+                },
+                3: {
+                    q2m: [
+                        { text: "What are Network Operator Requirements in IoT system management?", tag: "Dec 2022" },
+                        { text: "What is the use of YANG in IoT?", tag: "Dec 2022" }
+                    ],
+                    q10m: [
+                        { text: "What is the need for IoT System Management? Explain Network Operator Requirements and SNMP protocol limitations.", tag: "Dec 2022", hot: true },
+                        { text: "How do NETCONF and YANG manage IoT systems? Explain the NETCONF-YANG architecture with diagram.", tag: "Dec 2022", hot: true }
+                    ]
+                },
+                4: {
+                    q2m: [
+                        { text: "What is Raspberry Pi I2C Interface?", tag: "Dec 2022" },
+                        { text: "Why is Cloud needed for IoT systems?", tag: "Dec 2022" }
+                    ],
+                    q10m: [
+                        { text: "What is Raspberry Pi and its applications in IoT? Explain hardware interfaces: Serial, SPI, and I2C.", tag: "Dec 2022", hot: true },
+                        { text: "Explain Cloud Storage Models and Communication APIs for IoT (REST vs WebSocket APIs).", tag: "Dec 2022", hot: true }
+                    ]
+                }
+            }
+        };
+
+        let currentSubject = localStorage.getItem('bca_exam_subject') || 'php';
+        let currentUnit = localStorage.getItem('bca_exam_unit') || '4';
+        let currentMode = localStorage.getItem('bca_exam_mode') || 'syllabus';
+
+        function switchMode(mode) {
+            currentMode = mode;
+            localStorage.setItem('bca_exam_mode', mode);
+            updateModeUI();
+            renderView();
+        }
+
+        function updateModeUI() {
+            const qBtn = document.getElementById('btn-mode-questions');
+            const sBtn = document.getElementById('btn-mode-syllabus');
+            if (qBtn && sBtn) {
+                qBtn.classList.toggle('active', currentMode === 'questions');
+                sBtn.classList.toggle('active', currentMode === 'syllabus');
+            }
+        }
+
+        function switchSubject(sub) {
+            currentSubject = sub;
+            localStorage.setItem('bca_exam_subject', sub);
+            updateSubjectUI();
+            renderView();
+        }
+
+        function updateSubjectUI() {
+            document.querySelectorAll('.sub-btn').forEach(btn => {
+                const isMatch = btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${currentSubject}'`);
+                btn.classList.toggle('active', !!isMatch);
+            });
+        }
+
+        function switchUnit(unit) {
+            currentUnit = String(unit);
+            localStorage.setItem('bca_exam_unit', currentUnit);
+            updateUnitUI();
+            renderView();
+        }
+
+        function updateUnitUI() {
+            document.querySelectorAll('.unit-btn').forEach(btn => {
+                const onclickStr = btn.getAttribute('onclick') || '';
+                const isMatch = onclickStr.includes(`(${currentUnit})`) || (currentUnit === 'all' && onclickStr.includes("'all'"));
+                btn.classList.toggle('active', isMatch);
+            });
+        }
+
+        function renderView() {
+            const container = document.getElementById('content-container');
+            const sub = syllabusData[currentSubject];
+            let html = '';
+
+            // Header summary info card
+            html += `
+                <div class="syllabus-overview-card">
+                    <div class="info-pill">
+                        <div class="info-label">Subject Code</div>
+                        <div class="info-val">${sub.code}</div>
+                    </div>
+                    <div class="info-pill">
+                        <div class="info-label">Paper M.Code</div>
+                        <div class="info-val">${sub.mcode}</div>
+                    </div>
+                    <div class="info-pill">
+                        <div class="info-label">Exam Scheme</div>
+                        <div class="info-val">Ext: ${sub.extMarks} | Int: ${sub.intMarks}</div>
+                    </div>
+                    <div class="info-pill">
+                        <div class="info-label">Total Credits / Hours</div>
+                        <div class="info-val">${sub.credits} Credits (${sub.contactHours})</div>
+                    </div>
+                </div>
+            `;
+
+            if (currentMode === 'syllabus') {
+                // RENDER OFFICIAL SYLLABUS
+                const renderSyllabusUnit = (uNum) => {
+                    const u = sub.units[uNum];
+                    if (!u) return '';
+                    return `
+                        <div class="unit-block-syllabus">
+                            <span class="syllabus-unit-badge">⏱️ Contact Time: ${u.hours}</span>
+                            <div class="syllabus-unit-title">${u.name}</div>
+                            
+                            <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-top: 10px;">
+                                Detailed Curriculum Topics:
+                            </div>
+                            <div class="topics-grid">
+                                ${u.topics.map(t => `<div class="topic-chip">${t}</div>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                };
+
+                if (currentUnit === 'all') {
+                    for (let i = 1; i <= 4; i++) html += renderSyllabusUnit(i);
+                } else {
+                    html += renderSyllabusUnit(currentUnit);
+                }
+
+                // Reference books footer
+                html += `
+                    <div class="unit-block-syllabus" style="background: rgba(15, 23, 42, 0.6); border-style: dashed;">
+                        <div style="font-weight: 700; color: #fbbf24; margin-bottom: 8px;">📚 Prescribed University Textbooks:</div>
+                        <ul style="padding-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                            ${sub.textbooks.map(b => `<li>${b}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+
+            } else {
+                // RENDER QUESTION BANK
+                const qSub = examQuestions[currentSubject];
+                const renderQuestionUnit = (uNum) => {
+                    const u = sub.units[uNum];
+                    const qData = qSub[uNum];
+                    if (!u || !qData) return '';
+                    return `
+                        <div class="unit-block-syllabus" style="margin-bottom: 24px;">
+                            <div class="syllabus-unit-title">${u.name}</div>
+                            
+                            <!-- 2 Marks -->
+                            <div class="section-label">
+                                <span class="badge-2m">Section A</span> Short Answer Questions (2 Marks)
+                            </div>
+                            ${qData.q2m.map((q, idx) => `
+                                <div class="q-card">
+                                    <div class="q-text"><b>Q${idx + 1}.</b> ${q.text}</div>
+                                    <div class="q-meta">
+                                        <span class="tag-pyq">📜 ${q.tag}</span>
+                                    </div>
+                                </div>
+                            `).join('')}
+
+                            <!-- 10 Marks -->
+                            <div class="section-label" style="margin-top: 24px;">
+                                <span class="badge-10m">Section B</span> Long / Practical Questions (10 Marks)
+                            </div>
+                            ${qData.q10m.map((q, idx) => `
+                                <div class="q-card" style="border-left: 3px solid ${q.hot ? 'var(--warning)' : 'var(--primary-light)'};">
+                                    <div class="q-text"><b>Q${idx + 1}.</b> ${q.text}</div>
+                                    <div class="q-meta">
+                                        <span class="tag-pyq">📜 ${q.tag}</span>
+                                        ${q.hot ? '<span class="tag-high">🔥 HIGH REPEAT / 90%+ PROBABILITY</span>' : ''}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                };
+
+                if (currentUnit === 'all') {
+                    for (let i = 1; i <= 4; i++) html += renderQuestionUnit(i);
+                } else {
+                    html += renderQuestionUnit(currentUnit);
+                }
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Initialize view with restored persistent state
+        updateModeUI();
+        updateSubjectUI();
+        updateUnitUI();
+        renderView();
+    </script>
+</body>
+</html>
