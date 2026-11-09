@@ -109,6 +109,19 @@
             width: 100%;
         }
 
+        .diagram-box {
+            background: #090d16;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 10px;
+            padding: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #38bdf8;
+            overflow-x: auto;
+            margin: 14px 0;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
         /* Mobile Optimization */
         @media (max-width: 968px) {
             header {
@@ -987,6 +1000,238 @@
             }
         };
 
+        const javaUnitNotes = {
+            1: {
+                title: "Unit I: Java Fundamentals, Architecture, JDK vs JRE vs JVM",
+                mdPath: "01_Programming_in_Java/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. JVM Architecture & Platform Independence (10 Marks)",
+                        badge: "Architecture & Diagram",
+                        content: `
+                            <p><b>Working Mechanism:</b> Java achieves platform independence via <b>Write Once, Run Anywhere (WORA)</b>. Source code (<code>.java</code>) is compiled by the Java Compiler (<code>javac</code>) into portable bytecode (<code>.class</code>). The Java Virtual Machine (JVM) interprets/jit-compiles this bytecode into platform-specific machine code.</p>
+                            <pre class="diagram-box">
+ [ Source Code (.java) ] ---> [ Compiler (javac) ] ---> [ Bytecode (.class) ]
+                                                                 |
+                                                          [ JVM (Windows/Linux/Mac) ]
+                                                                 |
+ [ Hardware Architecture ] <--- [ Native Machine Code ] <--- [ Execution Engine ]
+                            </pre>
+                            <p><b>JDK vs JRE vs JVM:</b></p>
+                            <ul>
+                                <li><b>JVM (Java Virtual Machine):</b> Executes Java bytecode.</li>
+                                <li><b>JRE (Java Runtime Environment):</b> JVM + Core Library classes required for execution.</li>
+                                <li><b>JDK (Java Development Kit):</b> JRE + Development Tools (compiler <code>javac</code>, debugger <code>jdb</code>).</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+            2: {
+                title: "Unit II: Classes, Objects, Inheritance, Polymorphism & GC",
+                mdPath: "01_Programming_in_Java/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. OOP Principles & Inheritance in Java (10 Marks)",
+                        badge: "Object-Oriented Programming",
+                        content: `
+                            <p><b>Core OOP Pillars:</b></p>
+                            <ul>
+                                <li><b>Encapsulation:</b> Wrapping data and methods into a single unit (class) with private data and public getter/setter methods.</li>
+                                <li><b>Inheritance:</b> Mechanism where one class acquires properties of another using the <code>extends</code> keyword.</li>
+                                <li><b>Polymorphism:</b> Ability to take many forms. Achieved via Method Overloading (compile-time) and Method Overriding (runtime).</li>
+                                <li><b>Abstraction:</b> Hiding implementation details using abstract classes and interfaces.</li>
+                            </ul>
+                            <p><b>Garbage Collection & finalize():</b> Java automatically frees unused memory via the Garbage Collector. The <code>finalize()</code> method is called by the GC right before an object is destroyed.</p>
+                        `
+                    }
+                ]
+            },
+            3: {
+                title: "Unit III: Arrays, Strings, Interfaces, Packages & Exceptions",
+                mdPath: "01_Programming_in_Java/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. Exception Handling Hierarchy & try-catch-finally (10 Marks)",
+                        badge: "Robust Error Handling",
+                        content: `
+                            <p>An exception is an abnormal condition that disrupts normal program flow. Java uses a robust try-catch mechanism:</p>
+                            <ul>
+                                <li><b>try:</b> Contains risky code that might throw an exception.</li>
+                                <li><b>catch:</b> Handles the specific exception type.</li>
+                                <li><b>finally:</b> Always executes whether an exception occurs or not (used for cleanup like closing database connections).</li>
+                                <li><b>throw vs throws:</b> <code>throw</code> is used to explicitly throw an exception instance. <code>throws</code> is used in method signature to declare exceptions.</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+            4: {
+                title: "Unit IV: Multithreading, Applets & I/O Streams",
+                mdPath: "01_Programming_in_Java/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. Multithreading: Thread Lifecycle & Synchronization (10 Marks)",
+                        badge: "Concurrency & Threads",
+                        content: `
+                            <p><b>Thread Lifecycle:</b> New -> Runnable -> Running -> Blocked/Waiting -> Terminated (Dead).</p>
+                            <p><b>Creation Ways:</b> Extending <code>Thread</code> class OR Implementing <code>Runnable</code> interface (preferred for multiple inheritance).</p>
+                            <p><b>Thread Synchronization:</b> Used to prevent race conditions when multiple threads access shared resources simultaneously, using the <code>synchronized</code> keyword.</p>
+                        `
+                    }
+                ]
+            }
+        };
+
+        const linuxUnitNotes = {
+            1: {
+                title: "Unit I: Linux Architecture, Installation, Desktops & vi Editor",
+                mdPath: "02_Linux_Operating_System/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. Linux OS Architecture & Kernel Structure (10 Marks)",
+                        badge: "Architecture & Diagram",
+                        content: `
+                            <p><b>Architecture Layers:</b> Linux architecture consists of Hardware at the core, wrapped by the <b>Linux Kernel</b> (manages CPU, memory, devices), System Call Interface, Shell & Utilities, and User Applications at the top.</p>
+                            <pre class="diagram-box">
+ [ User Applications & Commands ]
+                 |
+        [ Shell / Utilities ]
+                 |
+   [ System Call Interface (API) ]
+                 |
+      [ Linux Kernel (Core OS) ]
+                 |
+     [ Hardware (CPU, RAM, Disk) ]
+                            </pre>
+                            <p><b>vi Editor Modes:</b></p>
+                            <ul>
+                                <li><b>Command Mode:</b> Default mode for navigation, deleting, copying lines.</li>
+                                <li><b>Insert Mode:</b> Entered via <code>i</code>, <code>a</code>, or <code>o</code> to type text.</li>
+                                <li><b>Ex/Last-line Mode:</b> Entered via <code>:</code> to save (<code>:wq</code>) or quit (<code>:q!</code>).</li>
+                            </ul>
+                        `
+                    }
+                ]
+            },
+            2: {
+                title: "Unit II: Shells, Utilities & Shell Scripting",
+                mdPath: "02_Linux_Operating_System/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. Shell Scripting & File Permissions (chmod) (10 Marks)",
+                        badge: "Scripting & Permissions",
+                        content: `
+                            <p><b>File Permissions:</b> Managed via <code>chmod</code>. Permissions are divided into User (u), Group (g), and Others (o) for Read (4), Write (2), and Execute (1).</p>
+                            <pre>
+  chmod 755 script.sh  // Owner gets rwx (7), Group & Others get rx (5)
+                            </pre>
+                        `
+                    }
+                ]
+            },
+            3: {
+                title: "Unit III: Process Management, Filters & Regular Expressions",
+                mdPath: "02_Linux_Operating_System/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. Process Management & Filters (grep, awk, sed) (10 Marks)",
+                        badge: "Processes & Filters",
+                        content: `
+                            <p><b>Process Commands:</b> <code>ps -ef</code> lists all running processes with PID and PPID. <code>top</code> shows real-time system resource usage. <code>kill [PID]</code> terminates a process.</p>
+                            <p><b>Powerful Filters:</b> <code>grep</code> for pattern searching, <code>awk</code> for field processing, and <code>sed</code> for stream editing.</p>
+                        `
+                    }
+                ]
+            },
+            4: {
+                title: "Unit IV: File System Hierarchy, System Administration & Backups",
+                mdPath: "02_Linux_Operating_System/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. Linux File System Hierarchy & Administration (10 Marks)",
+                        badge: "File System & Admin",
+                        content: `
+                            <p><b>Standard Directories:</b> <code>/bin</code> (binaries), <code>/etc</code> (configs), <code>/home</code> (user home), <code>/var</code> (logs), <code>/tmp</code> (temp).</p>
+                        `
+                    }
+                ]
+            }
+        };
+
+        const iotUnitNotes = {
+            1: {
+                title: "Unit I: Introduction to IoT, Architecture & M2M vs IoT",
+                mdPath: "04_Internet_of_Things_IoT/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. IoT 4-Layer Architecture & Working (10 Marks)",
+                        badge: "Architecture & Diagram",
+                        content: `
+                            <p><b>IoT Architecture Layers:</b></p>
+                            <ul>
+                                <li><b>Layer 1 (Perception/Sensors):</b> Physical sensors and actuators.</li>
+                                <li><b>Layer 2 (Network/Transport):</b> Routers, gateways, Wi-Fi, ZigBee.</li>
+                                <li><b>Layer 3 (Processing/Middleware):</b> Cloud servers and databases.</li>
+                                <li><b>Layer 4 (Application):</b> End-user dashboards and mobile alerts.</li>
+                            </ul>
+                            <pre class="diagram-box">
+ [ Sensors & Actuators (Layer 1) ] ---> [ Gateways & Network (Layer 2) ]
+                                                    |
+ [ User Dashboards (Layer 4) ] <--- [ Cloud Middleware & DB (Layer 3) ]
+                            </pre>
+                        `
+                    }
+                ]
+            },
+            2: {
+                title: "Unit II: Sensors, Actuators & Microcontrollers (Arduino)",
+                mdPath: "04_Internet_of_Things_IoT/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. Sensors vs Actuators & Arduino Uno Architecture (10 Marks)",
+                        badge: "Hardware",
+                        content: `
+                            <p><b>Sensors vs Actuators:</b> Sensors convert physical parameters into electrical signals. Actuators convert electrical signals into physical actions.</p>
+                        `
+                    }
+                ]
+            },
+            3: {
+                title: "Unit III: IoT Protocols: MQTT, CoAP & HTTP",
+                mdPath: "04_Internet_of_Things_IoT/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. MQTT Protocol Architecture & QoS Levels (10 Marks)",
+                        badge: "Protocols",
+                        content: `
+                            <p><b>MQTT:</b> Lightweight pub-sub protocol with Publisher, Broker, and Subscriber. Supports QoS 0, QoS 1, and QoS 2.</p>
+                        `
+                    }
+                ]
+            },
+            4: {
+                title: "Unit IV: Cloud Computing for IoT, AWS IoT Core & Security",
+                mdPath: "04_Internet_of_Things_IoT/Last_Day_Revision.md",
+                highlights: [
+                    {
+                        title: "1. Cloud IoT & Thing Shadows (10 Marks)",
+                        badge: "Cloud & Security",
+                        content: `
+                            <p><b>Thing Shadow:</b> JSON document storing device state in cloud. Secured via TLS/SSL and X.509 certificates.</p>
+                        `
+                    }
+                ]
+            }
+        };
+
+        const allUnitNotes = {
+            php: phpUnitNotes,
+            java: javaUnitNotes,
+            linux: linuxUnitNotes,
+            iot: iotUnitNotes
+        };
+
         function toggleAns(btn) {
             const drawer = btn.nextElementSibling;
             const isOpen = drawer.style.display === 'block';
@@ -1581,58 +1826,62 @@
                                 <p style="color: #94a3b8; font-size: 0.9rem;">Clean, high-yield examination notes with architecture diagrams, code blocks, and comparison tables.</p>
                             </div>
                             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                                <a href="03_Programming_in_PHP/Unit_1_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Unit 1 Notes</a>
-                                <a href="03_Programming_in_PHP/Unit_2_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Unit 2 Notes</a>
-                                <a href="03_Programming_in_PHP/Unit_3_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Unit 3 Notes</a>
-                                <a href="03_Programming_in_PHP/Unit_4_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Unit 4 Notes</a>
+                                <a href="03_Programming_in_PHP/Unit_1_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Notes Directory</a>
                             </div>
                         </div>
                     </div>
                 `;
 
-                if (currentSubject === 'php') {
-                    const renderUnitNotesBlock = (uNum) => {
-                        const noteData = phpUnitNotes[uNum];
-                        if (!noteData) return '';
+                const activeNotesDict = allUnitNotes[currentSubject] || phpUnitNotes;
+                const renderUnitNotesBlock = (uNum) => {
+                    const noteData = activeNotesDict[uNum];
+                    if (!noteData) {
                         return `
                             <div class="notes-card">
                                 <div class="notes-header">
                                     <div>
                                         <span class="syllabus-unit-badge">Unit ${uNum}</span>
-                                        <h3 style="font-size: 1.2rem; font-weight: 800; color:#ffffff; margin-top: 6px;">${noteData.title}</h3>
+                                        <h3 style="font-size: 1.2rem; font-weight: 800; color:#ffffff; margin-top: 6px;">Unit ${uNum} Comprehensive Guide</h3>
                                     </div>
-                                    <a href="${noteData.mdPath}" target="_blank" class="notes-link-btn">
-                                        📄 Full Markdown Notes
-                                    </a>
+                                    <span style="font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:6px; background:rgba(6,182,212,0.15); color:#38bdf8;">8+ Marks Model</span>
                                 </div>
-                                ${noteData.highlights.map(h => `
-                                    <div style="margin-bottom: 22px; padding: 18px; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px;">
-                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; flex-wrap:wrap; gap:8px;">
-                                            <h4 style="font-size: 1.05rem; font-weight: 700; color: #a5b4fc;">${h.title}</h4>
-                                            <span style="font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:6px; background:rgba(6,182,212,0.15); color:#38bdf8; border:1px solid rgba(6,182,212,0.3);">${h.badge}</span>
-                                        </div>
-                                        <div style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6;">
-                                            ${h.content}
-                                        </div>
-                                    </div>
-                                `).join('')}
+                                <div style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; padding: 12px 0;">
+                                    <p>Comprehensive high-yield model answers, architecture diagrams, and syntax examples for Unit ${uNum} of ${sub.title}.</p>
+                                    <p style="margin-top: 10px;">Check the subject folder or revision notes for complete detailed explanations.</p>
+                                </div>
                             </div>
                         `;
-                    };
-
-                    if (currentUnit === 'all') {
-                        for (let i = 1; i <= 4; i++) html += renderUnitNotesBlock(i);
-                    } else {
-                        html += renderUnitNotesBlock(currentUnit);
                     }
-                } else {
-                    html += `
-                        <div class="notes-card" style="text-align:center; padding: 40px;">
-                            <h3 style="color:#fbbf24; margin-bottom:12px;">Notes for ${sub.title}</h3>
-                            <p style="color:#94a3b8; margin-bottom:20px;">Use the Subject navigation or check the repository folder for comprehensive notes.</p>
-                            <a href="01_Programming_in_Java/Last_Day_Revision.md" target="_blank" class="notes-link-btn">Open Revision Notes</a>
+                    return `
+                        <div class="notes-card">
+                            <div class="notes-header">
+                                <div>
+                                    <span class="syllabus-unit-badge">Unit ${uNum}</span>
+                                    <h3 style="font-size: 1.2rem; font-weight: 800; color:#ffffff; margin-top: 6px;">${noteData.title}</h3>
+                                </div>
+                                <a href="${noteData.mdPath}" target="_blank" class="notes-link-btn">
+                                    📄 Full Markdown Notes
+                                </a>
+                            </div>
+                            ${noteData.highlights.map(h => `
+                                <div style="margin-bottom: 22px; padding: 18px; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px;">
+                                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; flex-wrap:wrap; gap:8px;">
+                                        <h4 style="font-size: 1.05rem; font-weight: 700; color: #a5b4fc;">${h.title}</h4>
+                                        <span style="font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:6px; background:rgba(6,182,212,0.15); color:#38bdf8; border:1px solid rgba(6,182,212,0.3);">${h.badge}</span>
+                                    </div>
+                                    <div style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6;">
+                                        ${h.content}
+                                    </div>
+                                </div>
+                            `).join('')}
                         </div>
                     `;
+                };
+
+                if (currentUnit === 'all') {
+                    for (let i = 1; i <= 4; i++) html += renderUnitNotesBlock(i);
+                } else {
+                    html += renderUnitNotesBlock(currentUnit);
                 }
 
             } else if (currentMode === 'syllabus') {
