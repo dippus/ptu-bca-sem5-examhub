@@ -122,6 +122,64 @@
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
         }
 
+        .visual-flowchart {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 12px;
+            padding: 18px 14px;
+            margin: 14px 0;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .flow-node {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #3b82f6;
+            color: #38bdf8;
+            font-weight: 700;
+            font-size: 0.84rem;
+            padding: 10px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .flow-arrow {
+            color: #facc15;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            text-align: center;
+        }
+
+        .flow-response-note {
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            font-size: 0.82rem;
+            font-weight: 600;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-top: 10px;
+            text-align: center;
+            width: 100%;
+        }
+
         .ans-toggle-badge {
             font-size: 0.75rem;
             font-weight: 700;
@@ -794,15 +852,26 @@
                         badge: "Architecture & Diagram",
                         content: `
                             <p><b>Working Mechanism:</b> When a user requests a <code>.php</code> file, the web server (Apache) intercepts it and routes it to the <b>PHP Zend Engine</b>. The engine compiles and executes the script, queries the MySQL database if needed, and strips all PHP code, sending only pure, standard HTML back to the browser.</p>
-                            <pre>
- [ Browser ] ---> (HTTP Request) ---> [ Apache Server (Port 80) ]
-                                             |
-                                    [ PHP Zend Engine ]
-                                             |
-                                    [ MySQL Database ]
-                                             |
- [ Browser ] <--- (Pure HTML/CSS) <--- [ Output Stream ]
-                            </pre>
+                            <div class="visual-flowchart">
+                                <div class="flow-step">
+                                    <span class="flow-node">🌐 Client Browser</span>
+                                    <span class="flow-arrow">➔ <i>HTTP Request</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">⚙️ Apache Server</span>
+                                    <span class="flow-arrow">➔ <i>Routes .php</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">🐘 PHP Zend Engine</span>
+                                    <span class="flow-arrow">➔ <i>SQL Query</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">🗄️ MySQL Database</span>
+                                </div>
+                                <div class="flow-response-note">
+                                    ⬅️ <b>Response Stream:</b> PHP strips code & returns <u>Pure HTML/CSS</u> to Client Browser
+                                </div>
+                            </div>
                             <p><b>Client-Side vs Server-Side:</b> Client-side scripts (JavaScript) run in the user's browser, source code is visible, and cannot touch databases. Server-side scripts (PHP) execute on the server, code is hidden and secure, and connect natively to databases.</p>
                         `
                     },
@@ -1022,13 +1091,26 @@
                         badge: "Architecture & Diagram",
                         content: `
                             <p><b>Working Mechanism:</b> Java achieves platform independence via <b>Write Once, Run Anywhere (WORA)</b>. Source code (<code>.java</code>) is compiled by the Java Compiler (<code>javac</code>) into portable bytecode (<code>.class</code>). The Java Virtual Machine (JVM) interprets/jit-compiles this bytecode into platform-specific machine code.</p>
-                            <pre class="diagram-box">
- [ Source Code (.java) ] ---> [ Compiler (javac) ] ---> [ Bytecode (.class) ]
-                                                                 |
-                                                          [ JVM (Windows/Linux/Mac) ]
-                                                                 |
- [ Hardware Architecture ] <--- [ Native Machine Code ] <--- [ Execution Engine ]
-                            </pre>
+                            <div class="visual-flowchart">
+                                <div class="flow-step">
+                                    <span class="flow-node">📄 Source (.java)</span>
+                                    <span class="flow-arrow">➔ <i>javac Compiler</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">📦 Bytecode (.class)</span>
+                                    <span class="flow-arrow">➔ <i>Class Loader</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">☕ JVM Execution Engine</span>
+                                    <span class="flow-arrow">➔ <i>JIT / Interpreter</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">💻 Native Hardware</span>
+                                </div>
+                                <div class="flow-response-note">
+                                    ✨ <b>Platform Independence (WORA):</b> Bytecode runs on any OS with a JVM!
+                                </div>
+                            </div>
                             <p><b>JDK vs JRE vs JVM:</b></p>
                             <ul>
                                 <li><b>JVM (Java Virtual Machine):</b> Executes Java bytecode.</li>
@@ -1105,17 +1187,23 @@
                         badge: "Architecture & Diagram",
                         content: `
                             <p><b>Architecture Layers:</b> Linux architecture consists of Hardware at the core, wrapped by the <b>Linux Kernel</b> (manages CPU, memory, devices), System Call Interface, Shell & Utilities, and User Applications at the top.</p>
-                            <pre class="diagram-box">
- [ User Applications & Commands ]
-                 |
-        [ Shell / Utilities ]
-                 |
-   [ System Call Interface (API) ]
-                 |
-      [ Linux Kernel (Core OS) ]
-                 |
-     [ Hardware (CPU, RAM, Disk) ]
-                            </pre>
+                            <div class="visual-flowchart">
+                                <div class="flow-step">
+                                    <span class="flow-node">🖥️ User Apps & Commands</span>
+                                    <span class="flow-arrow">➔ <i>Shell Interface</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">🐚 Bash / Zsh Shell</span>
+                                    <span class="flow-arrow">➔ <i>System Calls</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">🐧 Linux Kernel (Core OS)</span>
+                                    <span class="flow-arrow">➔ <i>Device Drivers</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">⚙️ Hardware (CPU, RAM, Disk)</span>
+                                </div>
+                            </div>
                             <p><b>vi Editor Modes:</b></p>
                             <ul>
                                 <li><b>Command Mode:</b> Default mode for navigation, deleting, copying lines.</li>
@@ -1187,11 +1275,23 @@
                                 <li><b>Layer 3 (Processing/Middleware):</b> Cloud servers and databases.</li>
                                 <li><b>Layer 4 (Application):</b> End-user dashboards and mobile alerts.</li>
                             </ul>
-                            <pre class="diagram-box">
- [ Sensors & Actuators (Layer 1) ] ---> [ Gateways & Network (Layer 2) ]
-                                                    |
- [ User Dashboards (Layer 4) ] <--- [ Cloud Middleware & DB (Layer 3) ]
-                            </pre>
+                            <div class="visual-flowchart">
+                                <div class="flow-step">
+                                    <span class="flow-node">📡 Layer 1: Sensors & Actuators</span>
+                                    <span class="flow-arrow">➔ <i>Sensory Data</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">🌐 Layer 2: Network Gateways</span>
+                                    <span class="flow-arrow">➔ <i>MQTT / CoAP</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">☁️ Layer 3: Cloud Middleware</span>
+                                    <span class="flow-arrow">➔ <i>Analytics & Shadow</i> ➔</span>
+                                </div>
+                                <div class="flow-step">
+                                    <span class="flow-node">📱 Layer 4: User Apps</span>
+                                </div>
+                            </div>
                         `
                     }
                 ]
