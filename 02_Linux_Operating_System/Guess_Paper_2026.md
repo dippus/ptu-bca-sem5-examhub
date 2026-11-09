@@ -1,5 +1,6 @@
 # Guess Paper 2026 — Linux Operating System
-**UGCA-1935 | M.Code: 90318 | PTU BCA Semester 5**
+**UGCA-1935 | M.Code: 90318 | PTU BCA Semester 5**  
+📅 **Official Exam Date:** 04-12-2026 (Friday) | ⏰ **Time:** 01:30 PM to 04:30 PM (Evening Session)  
 **Time: 3 Hours | Max Marks: 60 | External Exam**
 
 > **Instructions:** Section A is compulsory (10 × 2 = 20). Attempt any 4 from Section B (4 × 10 = 40).

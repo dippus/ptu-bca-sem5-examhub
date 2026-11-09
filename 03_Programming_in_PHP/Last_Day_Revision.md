@@ -1,5 +1,6 @@
 # ⚡ LAST DAY REVISION — Programming in PHP (UGCA-1929)
-**BCA Sem 5 | IKGPTU | 60 Marks External**
+**BCA Sem 5 | IKGPTU | 60 Marks External | M.Code: 90312**  
+📅 **Official Exam Date:** 11-11-2026 (Wednesday) | ⏰ **Time:** 01:30 PM to 04:30 PM (Evening Session)  
 > 🔥 Read this once. Attempt everything. Pass guaranteed.
 
 ---

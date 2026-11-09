@@ -1,5 +1,6 @@
 # Last Day Revision — Linux OS (UGCA-1935)
-**BCA Sem 5 | PTU | Read this the night before the exam**
+**BCA Sem 5 | PTU | M.Code: 90318 | Read this the night before the exam**  
+📅 **Official Exam Date:** 04-12-2026 (Friday) | ⏰ **Time:** 01:30 PM to 04:30 PM (Evening Session)
 
 ---
 

@@ -1,6 +1,6 @@
 # 📝 GUESS PAPER 2026 — Programming in PHP (UGCA-1929)
-**M.Code: 90312 | BCA Semester 5 | IKGPTU**
-**Time: 3 Hours | Max Marks: 60**
+**M.Code: 90312 | BCA Semester 5 | IKGPTU**  
+📅 **Official Exam Date:** 11-11-2026 (Wednesday) | ⏰ **Time:** 01:30 PM to 04:30 PM (Evening Session) | **Max Marks: 60**  
 > Note: Section A is compulsory. Attempt any FOUR questions from Section B.
 
 ---

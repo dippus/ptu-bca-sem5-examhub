@@ -133,16 +133,18 @@
             }
 
             .view-switch-tabs {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
+                display: flex;
+                flex-direction: column;
                 width: 100%;
+                gap: 8px;
             }
 
             .view-btn {
-                padding: 10px 8px;
-                font-size: 0.8rem;
+                padding: 10px 14px;
+                font-size: 0.85rem;
                 justify-content: center;
                 text-align: center;
+                width: 100%;
             }
 
             .main-layout {
@@ -522,7 +524,155 @@
             font-size: 0.75rem;
             font-weight: 700;
         }
+
+        /* Minimal Date Highlighting */
+        .sub-date-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: rgba(250, 204, 21, 0.15);
+            color: #facc15;
+            border: 1px solid rgba(250, 204, 21, 0.4);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .sub-date-badge.first-exam {
+            background: rgba(239, 68, 68, 0.15);
+            color: #fca5a5;
+            border-color: rgba(239, 68, 68, 0.35);
+        }
+
+        /* Model Answer Drawer & Toggle Button */
+        .ans-toggle-btn {
+            align-self: flex-start;
+            background: rgba(99, 102, 241, 0.12);
+            border: 1px solid rgba(99, 102, 241, 0.35);
+            color: #c7d2fe;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .ans-toggle-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+        }
+
+        .ans-toggle-btn.active {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.5);
+            color: #fca5a5;
+        }
+
+        .ans-drawer {
+            display: none;
+            margin-top: 12px;
+            padding: 16px 20px;
+            background: #0d1322;
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 10px;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ans-drawer pre {
+            background: #060911;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 10px 0;
+            color: #38bdf8;
+        }
+
+        .ans-drawer table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.88rem;
+        }
+
+        .ans-drawer th, .ans-drawer td {
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .ans-drawer th {
+            background: rgba(99, 102, 241, 0.15);
+            color: #a5b4fc;
+        }
+
+        .ans-drawer ul, .ans-drawer ol {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .ans-drawer li {
+            margin-bottom: 6px;
+        }
+
+        /* Unit Notes View Styles */
+        .notes-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .notes-link-btn {
+            background: rgba(16, 185, 129, 0.15);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34d399;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.84rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .notes-link-btn:hover {
+            background: var(--success);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+        }
     </style>
+
 </head>
 <body>
 
@@ -538,13 +688,16 @@
                 Persistence Mode: ON (Auto-Saved)
             </div>
             
-            <!-- Global Mode Switcher: Questions vs Complete Official Syllabus -->
+            <!-- Global Mode Switcher -->
             <div class="view-switch-tabs">
                 <button class="view-btn active" id="btn-mode-questions" onclick="switchMode('questions')">
                     📝 Question Bank & PYQ
                 </button>
                 <button class="view-btn" id="btn-mode-syllabus" onclick="switchMode('syllabus')">
                     📖 Complete Official Syllabus
+                </button>
+                <button class="view-btn" id="btn-mode-notes" onclick="switchMode('notes')">
+                    ⚡ 8+ Marks Unit Notes
                 </button>
             </div>
         </div>
@@ -556,23 +709,35 @@
             <div class="sidebar-label" style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding-left: 4px;">Choose Subject</div>
             
             <button class="sub-btn active" onclick="switchSubject('php')">
-                <span class="sub-name">Programming in PHP</span>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="sub-name">Programming in PHP</span>
+                    <span class="sub-date-badge first-exam">11-11-2026</span>
+                </div>
                 <span class="sub-code">UGCA-1929 | M.Code: 90312</span>
             </button>
 
+            <button class="sub-btn" onclick="switchSubject('iot')">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="sub-name">Internet of Things (IoT)</span>
+                    <span class="sub-date-badge">19-11-2026</span>
+                </div>
+                <span class="sub-code">UGCA-1933 | M.Code: 90316</span>
+            </button>
+
             <button class="sub-btn" onclick="switchSubject('java')">
-                <span class="sub-name">Programming in Java</span>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="sub-name">Programming in Java</span>
+                    <span class="sub-date-badge">02-12-2026</span>
+                </div>
                 <span class="sub-code">UGCA-1932 | M.Code: 90315</span>
             </button>
 
             <button class="sub-btn" onclick="switchSubject('linux')">
-                <span class="sub-name">Linux Operating System</span>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span class="sub-name">Linux Operating System</span>
+                    <span class="sub-date-badge">04-12-2026</span>
+                </div>
                 <span class="sub-code">UGCA-1935 | M.Code: 90318</span>
-            </button>
-
-            <button class="sub-btn" onclick="switchSubject('iot')">
-                <span class="sub-name">Internet of Things (IoT)</span>
-                <span class="sub-code">UGCA-1933 | M.Code: 90316</span>
             </button>
         </aside>
 
@@ -593,11 +758,253 @@
     </div>
 
     <script>
+
+        const phpUnitNotes = {
+            1: {
+                title: "Unit I: Introduction to PHP, Architecture, Data Types & Scope",
+                mdPath: "03_Programming_in_PHP/Unit_1_Comprehensive_Notes.md",
+                highlights: [
+                    {
+                        title: "1. PHP Architecture & Execution Lifecycle (10 Marks)",
+                        badge: "Architecture & Diagram",
+                        content: `
+                            <p><b>Working Mechanism:</b> When a user requests a <code>.php</code> file, the web server (Apache) intercepts it and routes it to the <b>PHP Zend Engine</b>. The engine compiles and executes the script, queries the MySQL database if needed, and strips all PHP code, sending only pure, standard HTML back to the browser.</p>
+                            <pre>
+ [ Browser ] ---> (HTTP Request) ---> [ Apache Server (Port 80) ]
+                                             |
+                                    [ PHP Zend Engine ]
+                                             |
+                                    [ MySQL Database ]
+                                             |
+ [ Browser ] <--- (Pure HTML/CSS) <--- [ Output Stream ]
+                            </pre>
+                            <p><b>Client-Side vs Server-Side:</b> Client-side scripts (JavaScript) run in the user's browser, source code is visible, and cannot touch databases. Server-side scripts (PHP) execute on the server, code is hidden and secure, and connect natively to databases.</p>
+                        `
+                    },
+                    {
+                        title: "2. PHP Data Types & Variable Scope (10 Marks)",
+                        badge: "Core Language Rules",
+                        content: `
+                            <p>PHP is <b>loosely typed</b>. It supports 8 primitive data types across 3 categories:</p>
+                            <ul>
+                                <li><b>Scalar:</b> Integer, Float/Double, String, Boolean</li>
+                                <li><b>Compound:</b> Array, Object</li>
+                                <li><b>Special:</b> NULL, Resource (file/DB handles)</li>
+                            </ul>
+                            <p><b>Variable Scope Types:</b></p>
+                            <ul>
+                                <li><b>Local:</b> Declared inside a function, accessible only within that function.</li>
+                                <li><b>Global:</b> Declared outside functions. Accessible inside functions only using <code>global $var;</code>.</li>
+                                <li><b>Static:</b> Declared with <code>static $x = 0;</code>. Retains its value across function calls.</li>
+                            </ul>
+                            <pre>
+&lt;?php
+  $globalVar = "IKGPTU"; // Global
+
+  function demoScope() {
+      global $globalVar;
+      $localVar = "BCA Sem 5"; // Local
+      static $counter = 0;      // Static (retains value)
+      $counter++;
+      echo "Run #$counter: $localVar at $globalVar&lt;br&gt;";
+  }
+  demoScope(); // Run #1
+  demoScope(); // Run #2
+?&gt;
+                            </pre>
+                        `
+                    }
+                ]
+            },
+            2: {
+                title: "Unit II: Control Statements, Functions, Strings & Arrays",
+                mdPath: "03_Programming_in_PHP/Unit_2_Comprehensive_Notes.md",
+                highlights: [
+                    {
+                        title: "1. PHP Arrays & foreach Loop (10 Marks - 100% Repeat)",
+                        badge: "Arrays & Iteration",
+                        content: `
+                            <p><b>3 Types of Arrays in PHP:</b></p>
+                            <ul>
+                                <li><b>Indexed Array:</b> Numeric keys starting from 0. <code>$colors = array("Red", "Blue");</code></li>
+                                <li><b>Associative Array:</b> User-defined string keys. <code>$student = array("name"=>"Aman", "marks"=>85);</code></li>
+                                <li><b>Multidimensional Array:</b> Array containing nested arrays.</li>
+                            </ul>
+                            <p><b>foreach Loop:</b> Specially designed for arrays without manual index tracking:</p>
+                            <pre>
+&lt;?php
+  $student = array("RollNo" => "501", "Name" => "Simran", "Grade" => "A+");
+
+  echo "&lt;table border='1' cellpadding='6'&gt;";
+  echo "&lt;tr&gt;&lt;th&gt;Field&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;";
+  foreach ($student as $key => $val) {
+      echo "&lt;tr&gt;&lt;td&gt;$key&lt;/td&gt;&lt;td&gt;$val&lt;/td&gt;&lt;/tr&gt;";
+  }
+  echo "&lt;/table&gt;";
+?&gt;
+                            </pre>
+                        `
+                    },
+                    {
+                        title: "2. User-Defined Functions: Pass by Value vs Pass by Reference",
+                        badge: "Functions & Parameters",
+                        content: `
+                            <table>
+                                <tr><th>Feature</th><th>Pass by Value (Default)</th><th>Pass by Reference (&)</th></tr>
+                                <tr><td>Mechanism</td><td>Copy of value is passed</td><td>Memory address (&) is passed</td></tr>
+                                <tr><td>Original Variable</td><td>Remains unchanged</td><td>Directly modified by function</td></tr>
+                                <tr><td>Syntax</td><td><code>function test($x)</code></td><td><code>function test(&$x)</code></td></tr>
+                            </table>
+                            <pre>
+&lt;?php
+  function addBonus(&$salary) { // Notice &
+      $salary += 5000;
+  }
+  $pay = 25000;
+  addBonus($pay);
+  echo "Updated Pay: " . $pay; // Output: 30000
+?&gt;
+                            </pre>
+                        `
+                    }
+                ]
+            },
+            3: {
+                title: "Unit III: Form Handling, Sessions, Cookies & File Handling",
+                mdPath: "03_Programming_in_PHP/Unit_3_Comprehensive_Notes.md",
+                highlights: [
+                    {
+                        title: "1. Form Handling: $_GET vs $_POST & HTML Form Processing",
+                        badge: "Web Forms",
+                        content: `
+                            <table>
+                                <tr><th>Parameter</th><th>$_GET</th><th>$_POST</th></tr>
+                                <tr><td>Data Location</td><td>Appended in URL (?query=val)</td><td>Inside HTTP Request Body</td></tr>
+                                <tr><td>Security</td><td>Low (Visible to everyone)</td><td>High (Hidden from URL)</td></tr>
+                                <tr><td>Capacity</td><td>Limit ~2048 characters</td><td>Virtually Unlimited (post_max_size)</td></tr>
+                                <tr><td>Best For</td><td>Search queries, pagination</td><td>Login, registration, payments</td></tr>
+                            </table>
+                            <pre>
+&lt;?php
+  if(isset($_POST['submit'])) {
+      $uname = htmlspecialchars($_POST['username']);
+      echo "Welcome, &lt;b&gt;" . $uname . "&lt;/b&gt;!";
+  }
+?&gt;
+&lt;form method="POST"&gt;
+  Username: &lt;input type="text" name="username" required&gt;
+  &lt;input type="submit" name="submit" value="Register"&gt;
+&lt;/form&gt;
+                            </pre>
+                        `
+                    },
+                    {
+                        title: "2. Sessions vs Cookies & Authentication Flow",
+                        badge: "State Management",
+                        content: `
+                            <p><b>Cookie:</b> Stored on the client's browser (Max 4KB). Created via <code>setcookie("user", "Aman", time()+3600);</code>.</p>
+                            <p><b>Session:</b> Stored on the server. Identified by session ID (PHPSESSID) in browser cookie. Highly secure.</p>
+                            <p><b>Session Lifecycle:</b></p>
+                            <ol>
+                                <li><code>session_start();</code> (Always on line 1 before any HTML).</li>
+                                <li><code>$_SESSION['user'] = "admin";</code> (Store session data).</li>
+                                <li><code>session_destroy();</code> (End session on logout).</li>
+                            </ol>
+                        `
+                    },
+                    {
+                        title: "3. File Handling & File Upload ($_FILES)",
+                        badge: "Files & Storage",
+                        content: `
+                            <p><b>File Modes:</b> <code>"r"</code> (Read), <code>"w"</code> (Write - Truncates), <code>"a"</code> (Append), <code>"r+"</code> (Read/Write).</p>
+                            <p><b>File Uploading:</b> Requires <code>enctype="multipart/form-data"</code> in HTML form.</p>
+                            <pre>
+&lt;?php
+  if(isset($_POST['upload'])) {
+      $target = "uploads/" . basename($_FILES['myfile']['name']);
+      if(move_uploaded_file($_FILES['myfile']['tmp_name'], $target)) {
+          echo "File uploaded successfully!";
+      }
+  }
+?&gt;
+                            </pre>
+                        `
+                    }
+                ]
+            },
+            4: {
+                title: "Unit IV: MySQL Database Integration & Full CRUD Operations",
+                mdPath: "03_Programming_in_PHP/Unit_4_Comprehensive_Notes.md",
+                highlights: [
+                    {
+                        title: "1. MySQL Connectivity & HTML Table Display (100% Repeat)",
+                        badge: "Database & HTML Table",
+                        content: `
+                            <p><b>4-Step Procedure:</b></p>
+                            <ol>
+                                <li><b>Connect:</b> <code>$conn = mysqli_connect("localhost", "root", "", "db_name");</code></li>
+                                <li><b>Query:</b> <code>$res = mysqli_query($conn, "SELECT * FROM students");</code></li>
+                                <li><b>Traverse:</b> <code>while($row = mysqli_fetch_assoc($res)) { echo "&lt;tr&gt;&lt;td&gt;" . $row['name'] . "&lt;/td&gt;&lt;/tr&gt;"; }</code></li>
+                                <li><b>Close:</b> <code>mysqli_close($conn);</code></li>
+                            </ol>
+                            <pre>
+&lt;?php
+  $conn = mysqli_connect("localhost", "root", "", "university_db");
+  if(!$conn) { die("Connection Failed: " . mysqli_connect_error()); }
+
+  $res = mysqli_query($conn, "SELECT roll_no, name, marks FROM students");
+
+  echo "&lt;table border='1' cellpadding='8'&gt;";
+  echo "&lt;tr&gt;&lt;th&gt;Roll No&lt;/th&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Marks&lt;/th&gt;&lt;/tr&gt;";
+  while($row = mysqli_fetch_assoc($res)) {
+      echo "&lt;tr&gt;";
+      echo "&lt;td&gt;" . $row['roll_no'] . "&lt;/td&gt;";
+      echo "&lt;td&gt;" . $row['name'] . "&lt;/td&gt;";
+      echo "&lt;td&gt;" . $row['marks'] . "&lt;/td&gt;";
+      echo "&lt;/tr&gt;";
+  }
+  echo "&lt;/table&gt;";
+  mysqli_close($conn);
+?&gt;
+                            </pre>
+                        `
+                    },
+                    {
+                        title: "2. Full CRUD Operations in PHP & MySQL",
+                        badge: "CRUD Operations",
+                        content: `
+                            <ul>
+                                <li><b>Create (INSERT):</b> <code>INSERT INTO students (roll_no, name, marks) VALUES (101, 'Rohan', 85);</code></li>
+                                <li><b>Read (SELECT):</b> <code>SELECT * FROM students WHERE marks >= 40;</code></li>
+                                <li><b>Update (UPDATE):</b> <code>UPDATE students SET marks = 90 WHERE roll_no = 101;</code></li>
+                                <li><b>Delete (DELETE):</b> <code>DELETE FROM students WHERE roll_no = 101;</code></li>
+                            </ul>
+                            <p><b>mysqli_fetch_assoc vs mysqli_fetch_array:</b></p>
+                            <p><code>mysqli_fetch_assoc()</code> returns associative array with column names as keys (saves memory). <code>mysqli_fetch_array()</code> returns both numeric indexes and column names (double memory).</p>
+                        `
+                    }
+                ]
+            }
+        };
+
+        function toggleAns(btn) {
+            const drawer = btn.nextElementSibling;
+            const isOpen = drawer.style.display === 'block';
+            drawer.style.display = isOpen ? 'none' : 'block';
+            btn.innerHTML = isOpen 
+                ? '<span>💡</span> View 8+ Marks Model Answer' 
+                : '<span>❌</span> Hide Model Answer';
+            btn.classList.toggle('active', !isOpen);
+        }
+
         const syllabusData = {
             php: {
                 title: "Programming in PHP",
                 code: "UGCA1929",
                 mcode: "90312",
+                examDate: "11-11-2026",
+                examDay: "Wednesday",
+                examTime: "01:30 PM to 04:30 PM (Evening Session)",
                 credits: 3,
                 contactHours: "33 Hours",
                 extMarks: 60,
@@ -670,6 +1077,9 @@
                 title: "Programming in Java",
                 code: "UGCA1932",
                 mcode: "90315",
+                examDate: "02-12-2026",
+                examDay: "Wednesday",
+                examTime: "01:30 PM to 04:30 PM (Evening Session)",
                 credits: 4,
                 contactHours: "44 Hours",
                 extMarks: 60,
@@ -741,6 +1151,9 @@
                 title: "Linux Operating System",
                 code: "UGCA1935",
                 mcode: "90318",
+                examDate: "04-12-2026",
+                examDay: "Friday",
+                examTime: "01:30 PM to 04:30 PM (Evening Session)",
                 credits: 4,
                 contactHours: "44 Hours",
                 extMarks: 60,
@@ -809,6 +1222,9 @@
                 title: "Internet of Things (IoT)",
                 code: "UGCA1933",
                 mcode: "90316",
+                examDate: "19-11-2026",
+                examDay: "Thursday",
+                examTime: "01:30 PM to 04:30 PM (Evening Session)",
                 credits: 4,
                 contactHours: "44 Hours",
                 extMarks: 60,
@@ -1073,6 +1489,7 @@
         let currentSubject = localStorage.getItem('bca_exam_subject') || 'php';
         let currentUnit = localStorage.getItem('bca_exam_unit') || '4';
         let currentMode = localStorage.getItem('bca_exam_mode') || 'syllabus';
+        if (currentMode === 'datesheet') currentMode = 'syllabus';
 
         function switchMode(mode) {
             currentMode = mode;
@@ -1084,10 +1501,10 @@
         function updateModeUI() {
             const qBtn = document.getElementById('btn-mode-questions');
             const sBtn = document.getElementById('btn-mode-syllabus');
-            if (qBtn && sBtn) {
-                qBtn.classList.toggle('active', currentMode === 'questions');
-                sBtn.classList.toggle('active', currentMode === 'syllabus');
-            }
+            const nBtn = document.getElementById('btn-mode-notes');
+            if (qBtn) qBtn.classList.toggle('active', currentMode === 'questions');
+            if (sBtn) sBtn.classList.toggle('active', currentMode === 'syllabus');
+            if (nBtn) nBtn.classList.toggle('active', currentMode === 'notes');
         }
 
         function switchSubject(sub) {
@@ -1124,9 +1541,17 @@
             const sub = syllabusData[currentSubject];
             let html = '';
 
-            // Header summary info card
+            // Header summary info card with clean highlighted date
             html += `
                 <div class="syllabus-overview-card">
+                    <div class="info-pill" style="border-color: rgba(250, 204, 21, 0.4); background: rgba(250, 204, 21, 0.06);">
+                        <div class="info-label" style="color: #facc15;">Exam Date</div>
+                        <div class="info-val" style="color: #facc15;">${sub.examDate} <span style="font-size:0.8rem; color:#94a3b8; font-weight:500;">(${sub.examDay})</span></div>
+                    </div>
+                    <div class="info-pill">
+                        <div class="info-label">Exam Timing</div>
+                        <div class="info-val" style="font-size: 0.88rem;">1:30 PM – 4:30 PM (Evening)</div>
+                    </div>
                     <div class="info-pill">
                         <div class="info-label">Subject Code</div>
                         <div class="info-val">${sub.code}</div>
@@ -1146,7 +1571,71 @@
                 </div>
             `;
 
-            if (currentMode === 'syllabus') {
+            if (currentMode === 'notes') {
+                // RENDER 8+ MARKS UNIT MASTER NOTES
+                html += `
+                    <div style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 14px; padding: 22px; margin-bottom: 24px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+                            <div>
+                                <h2 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">⚡ Master Notes & Model Answers (8+ Marks Blueprint)</h2>
+                                <p style="color: #94a3b8; font-size: 0.9rem;">Clean, high-yield examination notes with architecture diagrams, code blocks, and comparison tables.</p>
+                            </div>
+                            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                                <a href="03_Programming_in_PHP/Unit_1_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Unit 1 Notes</a>
+                                <a href="03_Programming_in_PHP/Unit_2_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Unit 2 Notes</a>
+                                <a href="03_Programming_in_PHP/Unit_3_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Unit 3 Notes</a>
+                                <a href="03_Programming_in_PHP/Unit_4_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Unit 4 Notes</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if (currentSubject === 'php') {
+                    const renderUnitNotesBlock = (uNum) => {
+                        const noteData = phpUnitNotes[uNum];
+                        if (!noteData) return '';
+                        return `
+                            <div class="notes-card">
+                                <div class="notes-header">
+                                    <div>
+                                        <span class="syllabus-unit-badge">Unit ${uNum}</span>
+                                        <h3 style="font-size: 1.2rem; font-weight: 800; color:#ffffff; margin-top: 6px;">${noteData.title}</h3>
+                                    </div>
+                                    <a href="${noteData.mdPath}" target="_blank" class="notes-link-btn">
+                                        📄 Full Markdown Notes
+                                    </a>
+                                </div>
+                                ${noteData.highlights.map(h => `
+                                    <div style="margin-bottom: 22px; padding: 18px; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border); border-radius: 10px;">
+                                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px; flex-wrap:wrap; gap:8px;">
+                                            <h4 style="font-size: 1.05rem; font-weight: 700; color: #a5b4fc;">${h.title}</h4>
+                                            <span style="font-size:0.75rem; font-weight:700; padding:2px 8px; border-radius:6px; background:rgba(6,182,212,0.15); color:#38bdf8; border:1px solid rgba(6,182,212,0.3);">${h.badge}</span>
+                                        </div>
+                                        <div style="color: #cbd5e1; font-size: 0.92rem; line-height: 1.6;">
+                                            ${h.content}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    };
+
+                    if (currentUnit === 'all') {
+                        for (let i = 1; i <= 4; i++) html += renderUnitNotesBlock(i);
+                    } else {
+                        html += renderUnitNotesBlock(currentUnit);
+                    }
+                } else {
+                    html += `
+                        <div class="notes-card" style="text-align:center; padding: 40px;">
+                            <h3 style="color:#fbbf24; margin-bottom:12px;">Notes for ${sub.title}</h3>
+                            <p style="color:#94a3b8; margin-bottom:20px;">Use the Subject navigation or check the repository folder for comprehensive notes.</p>
+                            <a href="01_Programming_in_Java/Last_Day_Revision.md" target="_blank" class="notes-link-btn">Open Revision Notes</a>
+                        </div>
+                    `;
+                }
+
+            } else if (currentMode === 'syllabus') {
                 // RENDER OFFICIAL SYLLABUS
                 const renderSyllabusUnit = (uNum) => {
                     const u = sub.units[uNum];

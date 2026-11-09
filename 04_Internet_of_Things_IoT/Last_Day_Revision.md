@@ -1,5 +1,6 @@
 # ⚡ Last Day Revision — Internet of Things (UGCA-1933)
-### BCA Sem 5 | IKGPTU | Ultra-Compact — Bullets Only
+### BCA Sem 5 | IKGPTU | M.Code: 90316 | Ultra-Compact — Bullets Only
+📅 **Official Exam Date:** 19-11-2026 (Thursday) | ⏰ **Time:** 01:30 PM to 04:30 PM (Evening Session)
 
 ---
 

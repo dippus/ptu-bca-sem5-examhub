@@ -1,5 +1,6 @@
 # 📝 GUESS PAPER 2026 — Programming in Java
 ### BCA Semester 5 | IKGPTU | UGCA-1932 | M.Code: 90315
+📅 **Official Exam Date:** 02-12-2026 (Wednesday) | ⏰ **Time:** 01:30 PM to 04:30 PM (Evening Session)
 ### Time: 3 Hours | Maximum Marks: 60 | External Exam
 
 > ⚠️ Based on PYQ trend analysis of Dec 2022, Nov 2023, Dec 2024, Nov 2025 papers.

@@ -1,5 +1,6 @@
 # 📝 Guess Paper 2026 — Internet of Things (UGCA-1933)
-### IKGPTU | BCA Semester 5 | M.Code 90316 | PTU-Style
+### IKGPTU | BCA Semester 5 | M.Code: 90316 | PTU-Style
+📅 **Official Exam Date:** 19-11-2026 (Thursday) | ⏰ **Time:** 01:30 PM to 04:30 PM (Evening Session)
 
 > **Total Marks: 60 | Time: 3 Hours**
 > Section A: Attempt ALL 10 questions (2 marks each = 20 marks)
