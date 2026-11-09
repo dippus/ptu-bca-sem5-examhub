@@ -722,34 +722,34 @@
             <div class="sidebar-label" style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding-left: 4px;">Choose Subject</div>
             
             <button class="sub-btn active" onclick="switchSubject('php')">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                     <span class="sub-name">Programming in PHP</span>
                     <span class="sub-date-badge first-exam">11-11-2026</span>
-                </div>
+                </span>
                 <span class="sub-code">UGCA-1929 | M.Code: 90312</span>
             </button>
 
             <button class="sub-btn" onclick="switchSubject('iot')">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                     <span class="sub-name">Internet of Things (IoT)</span>
                     <span class="sub-date-badge">19-11-2026</span>
-                </div>
+                </span>
                 <span class="sub-code">UGCA-1933 | M.Code: 90316</span>
             </button>
 
             <button class="sub-btn" onclick="switchSubject('java')">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                     <span class="sub-name">Programming in Java</span>
                     <span class="sub-date-badge">02-12-2026</span>
-                </div>
+                </span>
                 <span class="sub-code">UGCA-1932 | M.Code: 90315</span>
             </button>
 
             <button class="sub-btn" onclick="switchSubject('linux')">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="display:flex; justify-content:space-between; align-items:center; width:100%;">
                     <span class="sub-name">Linux Operating System</span>
                     <span class="sub-date-badge">04-12-2026</span>
-                </div>
+                </span>
                 <span class="sub-code">UGCA-1935 | M.Code: 90318</span>
             </button>
         </aside>
@@ -1817,6 +1817,11 @@
             `;
 
             if (currentMode === 'notes') {
+                let subNotesPath = "03_Programming_in_PHP/Unit_1_Comprehensive_Notes.md";
+                if (currentSubject === 'java') subNotesPath = "01_Programming_in_Java/Last_Day_Revision.md";
+                if (currentSubject === 'linux') subNotesPath = "02_Linux_Operating_System/Last_Day_Revision.md";
+                if (currentSubject === 'iot') subNotesPath = "04_Internet_of_Things_IoT/Last_Day_Revision.md";
+
                 // RENDER 8+ MARKS UNIT MASTER NOTES
                 html += `
                     <div style="background: linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(6, 182, 212, 0.1) 100%); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 14px; padding: 22px; margin-bottom: 24px;">
@@ -1826,7 +1831,7 @@
                                 <p style="color: #94a3b8; font-size: 0.9rem;">Clean, high-yield examination notes with architecture diagrams, code blocks, and comparison tables.</p>
                             </div>
                             <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                                <a href="03_Programming_in_PHP/Unit_1_Comprehensive_Notes.md" target="_blank" class="notes-link-btn">📘 Notes Directory</a>
+                                <a href="${subNotesPath}" target="_blank" class="notes-link-btn">📘 Open Revision Notes File</a>
                             </div>
                         </div>
                     </div>
