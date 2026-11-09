@@ -122,6 +122,18 @@
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
         }
 
+        .ans-toggle-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(79, 70, 229, 0.2);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
         /* Mobile Optimization */
         @media (max-width: 968px) {
             header {
@@ -1539,15 +1551,44 @@
             php: {
                 1: {
                     q2m: [
-                        { text: "What is PHP and why is it called a server-side scripting language?", tag: "Nov 2025, Dec 2022" },
-                        { text: "Clarify the difference of use of <?php ... ?> and <?= ... ?> tags.", tag: "Nov 2023" },
-                        { text: "What is variable scope in PHP? (Local, Global, Static)", tag: "Nov 2025, Nov 2024" },
-                        { text: "Differentiate between echo and print statements with an example.", tag: "Nov 2023" },
-                        { text: "What are dynamic variables (variable variables $$) in PHP?", tag: "High Probability" }
+                        {
+                            text: "What is PHP and why is it called a server-side scripting language?",
+                            tag: "Nov 2025, Dec 2022",
+                            ans: "<p><b>PHP (Hypertext Preprocessor)</b> is an open-source, server-side scripting language designed primarily for web development to build dynamic, interactive web pages.</p><p><b>Why is it called Server-Side?</b></p><ul><li><b>Execution Location:</b> The PHP code is compiled and executed on the <b>Web Server</b> (Zend Engine), NOT inside the user's web browser.</li><li><b>Source Code Security:</b> The client browser receives only the resulting pure HTML/CSS output. The actual PHP source code remains completely hidden and secure on the server.</li><li><b>Database Access:</b> PHP can natively connect to server-side databases like MySQL to process forms, authenticate users, and manage content before returning the web page.</li></ul><div class='diagram-box'>[ Client Browser ] ---> (HTTP Request) ---> [ Web Server (Apache) ] ---> [ PHP Engine ]<br>[ Client Browser ] <--- (Pure HTML/CSS) <--- [ HTTP Response ] <--- [ MySQL Database ]</div>"
+                        },
+                        {
+                            text: "Clarify the difference of use of <?php ... ?> and <?= ... ?> tags.",
+                            tag: "Nov 2023",
+                            ans: "<p><b>&lt;?php ... ?&gt;</b> is the standard PHP opening and closing tag used for full blocks of PHP code, functions, loops, and logic statements.</p><p><b>&lt;?= ... ?&gt;</b> is the shorthand echo tag. It is directly equivalent to writing <code>&lt;?php echo ...; ?&gt;</code> and is used for quickly outputting variables or expressions directly into HTML.</p>"
+                        },
+                        {
+                            text: "What is variable scope in PHP? (Local, Global, Static)",
+                            tag: "Nov 2025, Nov 2024",
+                            ans: "<p>Variable scope determines the accessibility of a variable across different parts of a script:</p><ul><li><b>Local Scope:</b> Declared inside a function, accessible only within that function.</li><li><b>Global Scope:</b> Declared outside functions. Can be accessed inside a function only by using the <code>global $var;</code> keyword or <code>$GLOBALS</code> array.</li><li><b>Static Scope:</b> Declared inside a function using <code>static $x = 0;</code>. It retains its value across multiple function calls.</li></ul>"
+                        },
+                        {
+                            text: "Differentiate between echo and print statements with an example.",
+                            tag: "Nov 2023",
+                            ans: "<p><b>echo:</b> Can take multiple comma-separated parameters, has no return value, and is slightly faster.</p><p><b>print:</b> Takes only one argument and returns 1 (can be used inside complex expressions).</p><pre>&lt;?php\n  echo \"Hello\", \" \", \"World!\"; // Valid\n  print(\"Hello World!\");         // Returns 1\n?&gt;</pre>"
+                        },
+                        {
+                            text: "What are dynamic variables (variable variables $$) in PHP?",
+                            tag: "High Probability",
+                            ans: "<p>Dynamic variables (variable variables) allow taking the string value of a variable and treating it as the name of a new variable using double dollar signs (<code>$$var</code>).</p><pre>&lt;?php\n  $a = \"city\";\n  $$a = \"Jalandhar\"; // Creates variable $city\n  echo $city;        // Output: Jalandhar\n?&gt;</pre>"
+                        }
                     ],
                     q10m: [
-                        { text: "Discuss PHP data types in detail with syntax and examples. Also explain variable manipulation and scope.", tag: "Nov 2025", hot: true },
-                        { text: "How is the PHP development environment configured to execute server-side scripts? Compare client-side vs server-side scripting.", tag: "Nov 2023" },
+                        {
+                            text: "Discuss PHP data types in detail with syntax and examples. Also explain variable manipulation and scope.",
+                            tag: "Nov 2025",
+                            hot: true,
+                            ans: "<p><b>PHP Data Types (8 Primitives across 3 Categories):</b></p><ul><li><b>Scalar Types:</b> Integer (<code>$x = 10;</code>), Float/Double (<code>$y = 10.5;</code>), String (<code>$str = \"BCA\";</code>), Boolean (<code>$flag = true;</code>).</li><li><b>Compound Types:</b> Array (<code>$colors = array(\"Red\", \"Blue\");</code>), Object (<code>$obj = new Student();</code>).</li><li><b>Special Types:</b> NULL (empty variable), Resource (database/file handles).</li></ul><p><b>Variable Manipulation:</b> Testing data types using <code>is_int()</code>, <code>is_string()</code>, <code>gettype()</code>, and dynamic type casting via <code>settype($var, \"integer\")</code> or explicit casting <code>(int)$var</code>.</p>"
+                        },
+                        {
+                            text: "How is the PHP development environment configured to execute server-side scripts? Compare client-side vs server-side scripting.",
+                            tag: "Nov 2023",
+                            ans: "<p><b>Environment Setup (XAMPP / WAMP Stack):</b></p><ol><li>Install Apache Web Server + PHP Engine + MySQL Database.</li><li>Place PHP scripts in the <code>htdocs/</code> directory.</li><li>Start Apache service and access via <code>http://localhost/filename.php</code>.</li></ol><p><b>Client-Side vs Server-Side Scripting:</b></p><table><tr><th>Feature</th><th>Client-Side (JavaScript)</th><th>Server-Side (PHP)</th></tr><tr><td>Execution</td><td>Runs in client browser</td><td>Runs on web server</td></tr><tr><td>Source Code</td><td>Visible to user</td><td>Hidden from user</td></tr><tr><td>Database</td><td>No direct DB access</td><td>Native DB access (MySQL)</td></tr></table>"
+                        },
                         { text: "Explain operators and dynamic type casting (settype, gettype) with demonstration programs.", tag: "Expected 2026" }
                     ]
                 },
@@ -1730,6 +1771,31 @@
                 }
             }
         };
+
+        function toggleQCard(card) {
+            const drawer = card.querySelector('.q-ans-drawer');
+            const badge = card.querySelector('.ans-toggle-badge');
+            if (!drawer) return;
+            const isOpen = drawer.style.display === 'block';
+            drawer.style.display = isOpen ? 'none' : 'block';
+            if (badge) {
+                badge.innerHTML = isOpen ? '💡 Tap for Answer' : '❌ Close Answer';
+                badge.style.background = isOpen ? 'rgba(79, 70, 229, 0.2)' : 'rgba(239, 68, 68, 0.2)';
+                badge.style.color = isOpen ? '#818cf8' : '#f87171';
+            }
+        }
+
+        function getFallbackAns(qText, type) {
+            return `
+                <p><b>Model Examination Answer & Key Points:</b></p>
+                <p>This is a core university examination question. Refer to the <b>⚡ 8+ Marks Unit Notes</b> tab for step-by-step code implementations and complete architecture diagrams.</p>
+                <ul>
+                    <li><b>Definition:</b> Define technical terms clearly using standard university terminology.</li>
+                    <li><b>Syntax / Example:</b> Provide valid code blocks or structural points to secure full marks.</li>
+                    <li><b>Exam Tip:</b> Highlight main differences or features in structured bullet format.</li>
+                </ul>
+            `;
+        }
 
         let currentSubject = localStorage.getItem('bca_exam_subject') || 'php';
         let currentUnit = localStorage.getItem('bca_exam_unit') || '4';
@@ -1930,7 +1996,7 @@
                 const qSub = examQuestions[currentSubject];
                 const renderQuestionUnit = (uNum) => {
                     const u = sub.units[uNum];
-                    const qData = qSub[uNum];
+                    const qData = qSub ? qSub[uNum] : null;
                     if (!u || !qData) return '';
                     return `
                         <div class="unit-block-syllabus" style="margin-bottom: 24px;">
@@ -1941,10 +2007,17 @@
                                 <span class="badge-2m">Section A</span> Short Answer Questions (2 Marks)
                             </div>
                             ${qData.q2m.map((q, idx) => `
-                                <div class="q-card">
-                                    <div class="q-text"><b>Q${idx + 1}.</b> ${q.text}</div>
+                                <div class="q-card" onclick="toggleQCard(this)" style="cursor: pointer;">
+                                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; width:100%;">
+                                        <div class="q-text"><b>Q${idx + 1}.</b> ${q.text}</div>
+                                        <span class="ans-toggle-badge">💡 Tap for Answer</span>
+                                    </div>
                                     <div class="q-meta">
                                         <span class="tag-pyq">📜 ${q.tag}</span>
+                                    </div>
+                                    <div class="q-ans-drawer" style="display: none; margin-top: 14px; padding: 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 10px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.6;">
+                                        <div style="font-weight: 700; color: #38bdf8; margin-bottom: 8px;">💡 Model Answer (University Standard):</div>
+                                        ${q.ans || getFallbackAns(q.text, '2m')}
                                     </div>
                                 </div>
                             `).join('')}
@@ -1954,11 +2027,18 @@
                                 <span class="badge-10m">Section B</span> Long / Practical Questions (10 Marks)
                             </div>
                             ${qData.q10m.map((q, idx) => `
-                                <div class="q-card" style="border-left: 3px solid ${q.hot ? 'var(--warning)' : 'var(--primary-light)'};">
-                                    <div class="q-text"><b>Q${idx + 1}.</b> ${q.text}</div>
+                                <div class="q-card" onclick="toggleQCard(this)" style="cursor: pointer; border-left: 3px solid ${q.hot ? 'var(--warning)' : 'var(--primary-light)'};">
+                                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; width:100%;">
+                                        <div class="q-text"><b>Q${idx + 1}.</b> ${q.text}</div>
+                                        <span class="ans-toggle-badge">💡 Tap for Answer</span>
+                                    </div>
                                     <div class="q-meta">
                                         <span class="tag-pyq">📜 ${q.tag}</span>
                                         ${q.hot ? '<span class="tag-high">🔥 HIGH REPEAT / 90%+ PROBABILITY</span>' : ''}
+                                    </div>
+                                    <div class="q-ans-drawer" style="display: none; margin-top: 14px; padding: 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: 10px; color: #cbd5e1; font-size: 0.9rem; line-height: 1.6;">
+                                        <div style="font-weight: 700; color: #38bdf8; margin-bottom: 8px;">💡 Model Answer (University Standard):</div>
+                                        ${q.ans || getFallbackAns(q.text, '10m')}
                                     </div>
                                 </div>
                             `).join('')}
